@@ -5,13 +5,19 @@ include 'koneksi.php'; //hubungkan dengan config.php untuk berhubungan dengan da
 $username=$_POST['username']; //tangkap data yg di input dari form login input username
 $password=$_POST['password']; //tangkap data yg di input dari form login input password
 
-$query=mysqli_query($conn, "select *from users where username='$username' and password='$password'"); //melakukan pengampilan data dari database untuk di cocokkan
-$xxx=mysqli_num_rows($query); //melakukan pencocokan
+$query=mysqli_query($conn, "select * from admin where username='$username' and password='$password'"); //melakukan pengampilan data dari database untuk di cocokkan
+// $r=mysqli_num_rows($query); //melakukan pencocokan
+// $role=$r['role'];
+$result = $conn->query("select * from admin where username='$username' and password='$password'");
 
-if($xxx==TRUE){ // melakukan pemeriksaan kecocokan dengan percabangan.
-   $_SESSION['username']=$username; //jika cocok, buat session dengan nama sesuai dengan username
-   header("location:index.html"); // dan alihkan ke index.php
+if($result->num_rows > 0){ // melakukan pemeriksaan kecocokan dengan percabangan.
+    while($row = $result->fetch_assoc()) {
+        $_SESSION['role'] = $row["role"];
+    }
+   //jika cocok, buat session dengan nama sesuai dengan username
+   header("location:index.php"); // dan alihkan ke index.php
 }else{ //jika tidak tampilkan pesan gagal login
    echo "<script> alert('Username atau Password Salah'); location = 'login.html'; </script>";
 }
+    
 ?>

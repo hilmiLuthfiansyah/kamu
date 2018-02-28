@@ -3,6 +3,6 @@
   session_destroy();
   echo "<script>
 		alert('Anda telah logout'); 
-		window.location = 'login.html';
+		window.location = 'login.php';
 		</script>";
 ?>

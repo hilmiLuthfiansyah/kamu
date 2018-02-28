@@ -38,8 +38,8 @@
         <div class="container">
             <div class="form-outer text-center d-flex align-items-center">
                 <div class="form-inner">
-                    <div class="logo"><span>Perusahaan Umum Daerah</span><strong class="text-primary"><br> BPR Majalengka</strong></div><br>
-                    <p>Login Pegawai Perusahaan Umum Daerah Bank Perkreditan Rakyat Majalengka </p>
+                    <div class="logo"><span>Halaman Pegawai</span><strong class="text-primary"><br>PUD. BPR Majalengka</strong></div><br>
+                    <p>Login Perusahaan Umum Daerah Bank Perkreditan Rakyat Majalengka </p>
                     <form action="login_proses.php" method="post">
                         <div class="form-group">
                             <label for="login-username" class="label-custom">User Name</label>
@@ -51,6 +51,7 @@
                         </div><input type="submit" class="btn btn-primary" name="submit" value="LOGIN" />
                         <!-- This should be submit button but I replaced it with <a> for demo purposes-->
                     </form>
+                   
                 </div>
                 <div class="copyrights text-center">
                     <p>Design by Hilmi Luthfiansyah</p>

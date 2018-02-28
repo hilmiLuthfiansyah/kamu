@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<?php
+session_start();
+?>
+!DOCTYPE html>
 <html>
 
 <head>
@@ -50,17 +53,30 @@
                 <div class="main-menu">
                     <ul id="side-main-menu" class="side-menu list-unstyled">
                         <li class="active">
-                            <a href="index.html"> <i class="icon-home"></i><span>Beranda</span></a>
+                            <a href="index.php"> <i class="icon-home"></i><span>Beranda</span></a>
                         </li>
-                        <li>
-                            <a href="tables.html"> <i class="icon-grid"> </i><span>Kriteria Keputusan  </span></a>
+                        <?php
+                        $role = $_SESSION['role'] == 'admin';
+                        if($role){
+                        ?>
+                        <li> <a href="#pages-nav-list" data-toggle="collapse" aria-expanded="false"><i class="icon-interface-windows"></i><span>Kriteria Keputusan</span>
+                            <div class="arrow pull-right"><i class="fa fa-angle-down"></i></div></a>
+                            <ul id="pages-nav-list" class="collapse list-unstyled">
+                                <li> <a href="#">Penghasilan</a></li>
+                                <li> <a href="#">Pengajuan Kredit</a></li>
+                                <li> <a href="#">Jangka Waktu</a></li>
+                                <li> <a href="#">Agunan</a></li>
+                                <li> <a href="#">Umur</a></li>
+                                <li> <a href="#">Tanggungan</a></li>
+                            </ul>
                         </li>
                         <li> <a href="pegawai.php"><i class="icon-form"></i><span>Data Pegawai</span></a></li>
+                        <?php } else {?>
                         <li> <a href="nasabah.php"><i class="icon-form"></i><span>Pemohon Kredit</span></a></li>
                         <li> <a href="keputusan.php"><i class="icon-presentation"></i><span>Keputusan</span></a></li>
                     </ul>
                 </div>
-
+                        <?php }?>
             </div>
         </nav>
         <div class="page home-page">
