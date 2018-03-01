@@ -47,7 +47,7 @@ session_start();
                             <h2 class="h5 text">BPR Majalengka</h2><span class="text-uppercase">Pegawai</span>
                     </div>
                     <div class="sidenav-header-logo">
-                        <a href="index.html" class="brand-small text-center"> <strong class="text-primary">BPR</strong></a>
+                        <a href="index.php" class="brand-small text-center"> <strong class="text-primary">BPR</strong></a>
                     </div>
                 </div>
                 <div class="main-menu">
@@ -138,7 +138,7 @@ session_start();
                                 <h2 class="display h4"><strong>MISI</strong></h2>
                             </center>
                             <p>
-                                <center> MISI Memberikan layanan perbankan yang prima dengan meningkatkan kualitas sumberdaya manusia yang handal dengan mengandalkan Standar Operasional Prosedur dan Informasi dan teknologi, laba usaha dan Pendapatan Asli Daerah
+                                <center> Memberikan layanan perbankan yang prima dengan meningkatkan kualitas sumberdaya manusia yang handal dengan mengandalkan Standar Operasional Prosedur dan Informasi dan teknologi, laba usaha dan Pendapatan Asli Daerah
                                     yang makin meningkat, meningkatkan manajemen yang profesional dan transparan serta berorientasi pada kebutuhan Pasar usaha Mikro, Kecil dan menengah. MOTTO “Mitra Kerja membangun Ekonomi Rakyat”
                                 </center>
                             </p>

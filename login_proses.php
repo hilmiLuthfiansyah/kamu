@@ -17,7 +17,7 @@ if($result->num_rows > 0){ // melakukan pemeriksaan kecocokan dengan percabangan
    //jika cocok, buat session dengan nama sesuai dengan username
    header("location:index.php"); // dan alihkan ke index.php
 }else{ //jika tidak tampilkan pesan gagal login
-   echo "<script> alert('Username atau Password Salah'); location = 'login.html'; </script>";
+   echo "<script> alert('Username atau Password Salah'); location = 'login.php'; </script>";
 }
     
 ?>
