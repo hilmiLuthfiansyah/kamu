@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -47,7 +47,7 @@
                         </div>
                         <div class="form-group">
                             <label for="login-password" class="label-custom">Password</label>
-                            <input id="login-password" type="password" name="password" required>
+                            <input id="login-password" type="password" name="password" required autocomplete="Off">
                         </div><input type="submit" class="btn btn-primary" name="submit" value="LOGIN" />
                         <!-- This should be submit button but I replaced it with <a> for demo purposes-->
                     </form>

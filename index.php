@@ -1,5 +1,10 @@
 <?php
-session_start();
+    session_start();
+    if(!$_SESSION['is_logged_in']){
+        echo "<script>
+		window.location = 'login.php';
+		</script>";
+    }
 ?>
 !DOCTYPE html>
 <html>
@@ -85,14 +90,22 @@ session_start();
                 <nav class="navbar">
                     <div class="container-fluid">
                         <div class="navbar-holder d-flex align-items-center justify-content-between">
-                            <div class="navbar-header"><a id="toggle-btn" href="#" class="menu-btn"><i class="icon-bars"> </i></a>
-                                <a href="index.html" class="navbar-brand">
-                                    <div class="brand-text d-none d-md-inline-block"><span>Halaman Pegawai </span><strong class="text-primary">   BPR Majalengka</strong></div>
+                            <ul class="navbar-header">
+                                <a id="toggle-btn" href="#" class="menu-btn">
+                                    <i class="icon-bars"> </i>
                                 </a>
-                            </div>
-
-                            </li>
-                            <li class="nav-item"><a href="logout.php" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a></li>
+                                <a href="index.php" class="navbar-brand">
+                                    <div class="brand-text d-none d-md-inline-block"><span>Halaman 
+                                        <?php if ($_SESSION['role']== 'admin'){
+                                            echo "Admin";
+                                        }else{
+                                            echo "Pegawai";
+                                        } ?>
+                                    </span><strong class="text-primary">   BPR Majalengka</strong></div>
+                                </a>
+                            </ul>
+                            <ul class="nav">
+                                <li class="nav-item"><a href="logout.php" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -180,26 +193,7 @@ session_start();
         <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
         <script src="vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-        <script src="js/charts-home.js"></script>
         <script src="js/front.js"></script>
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID.-->
-        <!---->
-        <script>
-            (function(b, o, i, l, e, r) {
-                b.GoogleAnalyticsObject = l;
-                b[l] || (b[l] =
-                    function() {
-                        (b[l].q = b[l].q || []).push(arguments)
-                    });
-                b[l].l = +new Date;
-                e = o.createElement(i);
-                r = o.getElementsByTagName(i)[0];
-                e.src = '//www.google-analytics.com/analytics.js';
-                r.parentNode.insertBefore(e, r)
-            }(window, document, 'script', 'ga'));
-            ga('create', 'UA-XXXXX-X');
-            ga('send', 'pageview');
-        </script>
     </body>
 
 </html>

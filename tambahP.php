@@ -1,13 +1,12 @@
 <?php
 include 'koneksi.php';
 $username	= $_POST['username'];
-$password  = $_POST['password'];
-$nip 	= $_POST['nip'];
+$password  = md5($_POST['password']);
+$nip 	    = $_POST['nip'];
 $nama 	= $_POST['nama'];
 $jabatan 	= $_POST['jabatan'];
 $alamat 	= $_POST['alamat'];
-
-$sql= "insert into users(username,password,nip,nama,jabatan,alamat)values('$username','$password','$nip','$nama','$jabatan','$alamat')";
+$sql= "insert into admin(username,password,id,nama,jabatan,alamat)values('$username','$password','$nip','$nama','$jabatan','$alamat')";
 
       
 if (!mysqli_query($conn, $sql))
