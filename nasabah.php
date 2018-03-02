@@ -10,8 +10,8 @@
 <?php
  include 'koneksi.php';  
  $sql="select * from user";  
-   
- $hasil=mysqli_query($conn,$sql);
+ $sql .="select * from kredit"; 
+ $hasil=mysqli_multi_query($conn,$sql);
 ?>
 <!DOCTYPE html>
 <html>
@@ -104,7 +104,7 @@
                 <div class="container-fluid">
                     <div class="navbar-holder d-flex align-items-center justify-content-between">
                         <div class="navbar-header"><a id="toggle-btn" href="#" class="menu-btn"><i class="icon-bars"> </i></a>
-                            <a href="index.html" class="navbar-brand">
+                            <a href="index.php" class="navbar-brand">
                                 <div class="brand-text d-none d-md-inline-block"><span>Halaman Pegawai </span><strong class="text-primary">   BPR Majalengka</strong></div>
                             </a>
                         </div>
@@ -118,15 +118,12 @@
         <div class="breadcrumb-holder">
             <div class="container-fluid">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item active">Data Pemohon Kredit</li>
+                    <li class="breadcrumb-item active"><h3>Data Pemohon Kredit Terdaftar</h3></li>
                 </ul>
             </div>
         </div>
         <section class="forms">
             <div class="container-fluid">
-                <header>
-                    <h1 class="h3 display">Data Pemohon Kredit Terdaftar</h1>
-                </header>
                 <div class="card-body">
                 <table class="table table-striped">
                 <thead>
@@ -154,15 +151,14 @@
                 ?>
                   <tr>
                   <td><?php echo $i;?></td>
-                  <td><?php echo $data['id'];?></td>
+                  <td><?php echo $data['id_user'];?></td>
                   <td><?php echo $data['nama'];?></td>
                   <td><?php echo $data['alamat'];?></td>			
-                  <td><?php echo $data['jk'];?></td>
                   <td><?php echo $data['pekerjaan'];?></td>
                   <td><?php echo $data['umur'];?></td>
                   <td><?php echo $data['penghasilan'];?></td>	
                   <td><?php echo $data['pengajuan'];?></td>			
-                  <td><?php echo $data['pengembalian'];?></td>
+                  <td><?php echo $data['waktu_pengembalian'];?></td>
                   <td><?php echo $data['jaminan'];?></td>			
                   <td><?php echo $data['tanggungan'];?></td>
 
@@ -187,7 +183,7 @@
         </div>
               <br><br><br>
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header d-flex align-items-center">
                                 <h2 class="h5 display display">Masukkan Data Pemohon Kredit</h2>

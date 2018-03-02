@@ -64,7 +64,7 @@
                <div class="main-menu">
                   <ul id="side-main-menu" class="side-menu list-unstyled">
 
-                     <a href="index.php">
+                  <li class="active"><a href="index.php">
                         <i class="icon-home"></i>
                         <span>Beranda</span>
                      </a>
