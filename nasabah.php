@@ -1,9 +1,16 @@
 <?php
-session_start();
+   session_start();
+   if(!$_SESSION['is_logged_in']){
+       echo "<script>
+     window.location = 'login.php';
+     </script>";
+   }
 ?>
+
 <?php
  include 'koneksi.php';  
- $sql="select * from nasabah";  
+ $sql="select * from user";  
+   
  $hasil=mysqli_query($conn,$sql);
 ?>
 <!DOCTYPE html>
@@ -44,19 +51,26 @@ session_start();
     <!-- Side Navbar -->
     <nav class="side-navbar">
     <div class="side-navbar-wrapper">
-        <div class="sidenav-header d-flex align-items-center justify-content-center">
-            <div class="sidenav-header-inner text-center">
-                <alt="person" class="img-fluid rounded-circle">
-                    <h2 class="h5 text">BPR Majalengka</h2><span class="text-uppercase">Pegawai</span>
-            </div>
-            <div class="sidenav-header-logo">
-                <a href="index.php" class="brand-small text-center"> <strong class="text-primary">BPR</strong></a>
-            </div>
-        </div>
-        <div class="main-menu">
-            <ul id="side-main-menu" class="side-menu list-unstyled">
-            
-                    <a href="index.php"> <i class="icon-home"></i><span>Beranda</span></a>
+    <div class="sidenav-header d-flex align-items-center justify-content-center">
+       <div class="sidenav-header-inner text-center">
+          <alt="person" class="img-fluid rounded-circle">
+             <h2 class="h5 text">BPR Majalengka</h2>
+             <span class="text-uppercase">Jawa Barat</span>
+       </div>
+       <div class="sidenav-header-logo">
+          <a href="index.php" class="brand-small text-center">
+             <strong class="text-primary">BPR</strong>
+          </a>
+       </div>
+    </div>
+          <div class="main-menu">
+             <ul id="side-main-menu" class="side-menu list-unstyled">
+ 
+                <a href="index.php">
+                   <i class="icon-home"></i>
+                   <span>Beranda</span>
+                </a>
+             
              
                 <?php
                 $role = $_SESSION['role'] == 'admin';
@@ -94,11 +108,9 @@ session_start();
                                 <div class="brand-text d-none d-md-inline-block"><span>Halaman Pegawai </span><strong class="text-primary">   BPR Majalengka</strong></div>
                             </a>
                         </div>
-
-                        </ul>
-                        </li>
+                        <ul class="nav">
                         <li class="nav-item"><a href="logout.php" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a></li>
-                        </ul>
+                    </ul>
                     </div>
                 </div>
             </nav>
@@ -183,62 +195,84 @@ session_start();
                             <div class="card-body">
                                 <p>Silahkan masukkan data yang diperlukan:</p>
                                 <form action="tambahN.php" method="post">
-
-                                    <div class="form-group">
-                                        <label>ID Nasabah</label>
-                                        <input type="text" name="id" placeholder="ID Nasabah" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Nama Lengkap</label>
-                                        <input type="text" name="nama" placeholder="Nama Lengkap" class="form-control">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Alamat </label>
-                                        <input type="text" name="alamat" placeholder="Alamat" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Jenis Kelamin</label>
-                                        <input type="text" name="jk" placeholder="Jenis Kelamin" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Pekerjaan</label>
-                                        <input type="text" name="pekerjaan" placeholder="Pekerjaan" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Umur</label>
-                                        <input type="text" name="umur" placeholder="Umur" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Penghasilan/Bulan</label>
-                                        <input type="text" name="penghasilan" placeholder="Penghasilan" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Pengajuan Kredit</label>
-                                        <input type="text" name="pengajuan" placeholder="Pengajuan Kredit" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Waktu Pengembalian/Bulan</label>
-                                        <input type="text" name="pengembalian" placeholder="Waktu Pengembalian/Bulan" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Jaminan</label>
-                                        <input type="text" name="jaminan" placeholder="Jaminan" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Tanggungan</label>
-                                        <input type="text" name="tanggungan" placeholder="Tanggungan" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="submit" name="submit" value="Tambahkan" class="btn btn-primary">
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                                <div class="row">
+                                   <div class="col-lg-12" style="margin-bottom:0px;">
+                                      <div class="form-group">
+                                         <label>Nama Lengkap</label>
+                                         <input type="text" name="nama" placeholder="Nama Lengkap" class="form-control">
+                                      </div>
+                                   </div>
+                                </div>
+                                <div class="row">
+                                   <div class="col-lg-6" style="margin-bottom:0px;">
+                                      <div class="form-group">
+                                         <label>ID Nasabah</label>
+                                         <input type="text" name="id_user" placeholder="ID Nasabah" class="form-control">
+                                      </div>
+                                   </div>
+                                   <div class="col-lg-6" style="margin-bottom:0px;">
+                                      <div class="form-group">
+                                         <label>Pekerjaan</label>
+                                         <input type="text" name="pekerjaan" placeholder="Pekerjaan" class="form-control">
+                                      </div>
+                                   </div>
+                                </div>
+                                <div class="form-group">
+                                   <label>Alamat</label>
+                                   <textarea style="min-height: 100px; max-height: 200px;" name="alamat" placeholder="Alamat" class="form-control"></textarea>
+                                </div>
+                                <div class="row">
+                                   <div class="col-lg-6" style="margin-bottom:0px;">
+                                      <div class="form-group">
+                                         <label>Penghasilan</label>
+                                         <input type="text" name="penghasilan" placeholder="Penghasilan/Bulan" class="form-control">
+                                      </div>
+                                   </div>
+                                   <div class="col-lg-6" style="margin-bottom:0px;">
+                                      <div class="form-group">
+                                         <label>Pengajuan Kredit</label>
+                                         <input type="text" name="pengajuan" placeholder="Pengajuan Kredit" class="form-control">
+                                      </div>
+                                   </div>
+                                </div>    
+                                <div class="row">
+                                   <div class="col-lg-6" style="margin-bottom:0px;">
+                                      <div class="form-group">
+                                         <label>Waktu Pengembalian</label>
+                                         <input type="text" name="waktu_pengembalian" placeholder="Waktu Pengembalian/Bulan" class="form-control">
+                                      </div>
+                                   </div>
+                                   <div class="col-lg-6" style="margin-bottom:0px;">
+                                      <div class="form-group">
+                                         <label>Jaminan</label>
+                                         <input type="text" name="jaminan" placeholder="Jaminan" class="form-control">
+                                      </div>
+                                   </div>
+                                </div>                
+                                <div class="row">
+                                   <div class="col-lg-6" style="margin-bottom:0px;">
+                                      <div class="form-group">
+                                         <label>Tanggungan</label>
+                                         <input type="text" name="tanggungan" placeholder="Tanggungan" class="form-control">
+                                      </div>
+                                   </div>
+                                   <div class="col-lg-6" style="margin-bottom:0px;">
+                                      <div class="form-group">
+                                         <label>Umur</label>
+                                         <input type="text" name="umur" placeholder="Umur" class="form-control">
+                                      </div>
+                                   </div>
+                                </div>   
+                                <div class="form-group">
+                                   <input type="submit" name="submit" value="Tambahkan" class="btn btn-primary">
+                                   </div>
+                                   </form>
+                                </div>
+                             </div>
+                          </div>
+                       </div>
                     </div>
-                </div>
-            </div>
-            </section>
+                 </section>
 
         <footer class="main-footer">
             <div class="container-fluid">

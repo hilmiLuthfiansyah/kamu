@@ -48,19 +48,19 @@
       <body>
          <!-- Side Navbar -->
          <nav class="side-navbar">
-            <div class="side-navbar-wrapper">
-               <div class="sidenav-header d-flex align-items-center justify-content-center">
-                  <div class="sidenav-header-inner text-center">
-                     <alt="person" class="img-fluid rounded-circle">
-                        <h2 class="h5 text">BPR Majalengka</h2>
-                        <span class="text-uppercase">Pegawai</span>
-                  </div>
-                  <div class="sidenav-header-logo">
-                     <a href="index.php" class="brand-small text-center">
-                        <strong class="text-primary">BPR</strong>
-                     </a>
-                  </div>
-               </div>
+         <div class="side-navbar-wrapper">
+         <div class="sidenav-header d-flex align-items-center justify-content-center">
+            <div class="sidenav-header-inner text-center">
+               <alt="person" class="img-fluid rounded-circle">
+                  <h2 class="h5 text">BPR Majalengka</h2>
+                  <span class="text-uppercase">Jawa Barat</span>
+            </div>
+            <div class="sidenav-header-logo">
+               <a href="index.php" class="brand-small text-center">
+                  <strong class="text-primary">BPR</strong>
+               </a>
+            </div>
+         </div>
                <div class="main-menu">
                   <ul id="side-main-menu" class="side-menu list-unstyled">
 
@@ -136,22 +136,23 @@
                            <a id="toggle-btn" href="#" class="menu-btn">
                               <i class="icon-bars"> </i>
                            </a>
-                           <a href="index.html" class="navbar-brand">
-                              <div class="brand-text d-none d-md-inline-block">
-                                 <span>Halaman Pegawai </span>
-                                 <strong class="text-primary"> BPR Majalengka</strong>
-                              </div>
-                           </a>
+                           <a href="index.php" class="navbar-brand">
+                           <div class="brand-text d-none d-md-inline-block"><span>Halaman 
+                               <?php if ($_SESSION['role']== 'admin'){
+                                   echo "Administrator";
+                               }else{
+                                   echo "Pegawai";
+                               } ?>
+                           </span><strong class="text-primary">   BPR Majalengka</strong></div>
+                       </a>
                         </div>
 
                         </ul>
-                        </li>
-                        <li class="nav-item">
-                           <a href="logout.php" class="nav-link logout">Logout
-                              <i class="fa fa-sign-out"></i>
-                           </a>
-                        </li>
-                        </ul>
+                            <ul class="nav">
+                                <li class="nav-item"><a href="logout.php" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a></li>
+                            </ul>
+
+                        
                      </div>
                   </div>
                </nav>
@@ -159,15 +160,13 @@
             <div class="breadcrumb-holder">
                <div class="container-fluid">
                   <ul class="breadcrumb">
-                     <li class="breadcrumb-item active">Data Pegawai Kredit</li>
+                     <li class="breadcrumb-item active"><h3>Data Pegawai Kredit<h3></li>
                   </ul>
                </div>
             </div>
             <section class="forms">
                <div class="container-fluid">
-                  <header>
-                     <h1 class="h3 display">Data Pegawai Terdaftar</h1>
-                  </header>
+                  <br>
                   <div class="row">
                      <div class="col-lg-12">
                         <table class="table table-striped">
@@ -229,7 +228,7 @@
                                     <div class="col-lg-12" style="margin-bottom:0px;">
                                        <div class="form-group">
                                           <label>Nama Lengkap</label>
-                                          <input type="text" name="nama" placeholder="Nama Lengkap Anda" class="form-control">
+                                          <input type="text" name="nama" placeholder="Nama Lengkap" class="form-control">
                                        </div>
                                     </div>
                                  </div>
@@ -257,14 +256,14 @@
                                     <div class="col-lg-6" style="margin-bottom:0px;">
                                        <div class="form-group">
                                           <label>Jabatan</label>
-                                          <input type="text" name="jabatan" placeholder="Jabatan Anda" class="form-control">
+                                          <input type="text" name="jabatan" placeholder="Jabatan " class="form-control">
                                        </div>
                                     </div>
                                  </div>
 
                                  <div class="form-group">
                                     <label>Alamat</label>
-                                    <textarea style="min-height: 100px; max-height: 200px;" name="alamat" placeholder="Alamat Anda" class="form-control"></textarea>
+                                    <textarea style="min-height: 100px; max-height: 200px;" name="alamat" placeholder="Alamat" class="form-control"></textarea>
                                  </div>
                                  <div class="form-group">
                                     <input type="submit" name="submit" value="Tambahkan" class="btn btn-primary">

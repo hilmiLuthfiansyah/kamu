@@ -38,7 +38,7 @@
         <div class="container">
             <div class="form-outer text-center d-flex align-items-center">
                 <div class="form-inner">
-                    <div class="logo"><span>Halaman Pegawai</span><strong class="text-primary"><br>PUD. BPR Majalengka</strong></div><br>
+                    <div class="logo"><span>Halaman Login</span><strong class="text-primary"><br>PUD. BPR Majalengka</strong></div><br>
                     <p>Login Perusahaan Umum Daerah Bank Perkreditan Rakyat Majalengka </p>
                     <form action="login_proses.php" method="post">
                         <div class="form-group">
@@ -72,24 +72,7 @@
     <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
     <script src="vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="js/front.js"></script>
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID.-->
-    <!---->
-    <script>
-        (function(b, o, i, l, e, r) {
-            b.GoogleAnalyticsObject = l;
-            b[l] || (b[l] =
-                function() {
-                    (b[l].q = b[l].q || []).push(arguments)
-                });
-            b[l].l = +new Date;
-            e = o.createElement(i);
-            r = o.getElementsByTagName(i)[0];
-            e.src = '//www.google-analytics.com/analytics.js';
-            r.parentNode.insertBefore(e, r)
-        }(window, document, 'script', 'ga'));
-        ga('create', 'UA-XXXXX-X');
-        ga('send', 'pageview');
-    </script>
+   
 </body>
 
 </html>

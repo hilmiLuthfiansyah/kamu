@@ -44,19 +44,25 @@ session_start();
    <!-- Side Navbar -->
    <nav class="side-navbar">
    <div class="side-navbar-wrapper">
-       <div class="sidenav-header d-flex align-items-center justify-content-center">
-           <div class="sidenav-header-inner text-center">
-               <alt="person" class="img-fluid rounded-circle">
-                   <h2 class="h5 text">BPR Majalengka</h2><span class="text-uppercase">Pegawai</span>
-           </div>
-           <div class="sidenav-header-logo">
-               <a href="index.php" class="brand-small text-center"> <strong class="text-primary">BPR</strong></a>
-           </div>
-       </div>
-       <div class="main-menu">
-           <ul id="side-main-menu" class="side-menu list-unstyled">
-           
-                   <a href="index.php"> <i class="icon-home"></i><span>Beranda</span></a>
+   <div class="sidenav-header d-flex align-items-center justify-content-center">
+      <div class="sidenav-header-inner text-center">
+         <alt="person" class="img-fluid rounded-circle">
+            <h2 class="h5 text">BPR Majalengka</h2>
+            <span class="text-uppercase">Jawa Barat</span>
+      </div>
+      <div class="sidenav-header-logo">
+         <a href="index.php" class="brand-small text-center">
+            <strong class="text-primary">BPR</strong>
+         </a>
+      </div>
+   </div>
+         <div class="main-menu">
+            <ul id="side-main-menu" class="side-menu list-unstyled">
+
+               <a href="index.php">
+                  <i class="icon-home"></i>
+                  <span>Beranda</span>
+               </a>
             
                <?php
                $role = $_SESSION['role'] == 'admin';
@@ -96,8 +102,8 @@ session_start();
                         </div>
 
                         </ul>
-                        </li>
-                        <li class="nav-item"><a href="logout.php" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a></li>
+                        <ul class="nav">
+                            <li class="nav-item"><a href="logout.php" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -194,24 +200,6 @@ session_start();
     <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
     <script src="vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="js/front.js"></script>
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID.-->
-    <!---->
-    <script>
-        (function(b, o, i, l, e, r) {
-            b.GoogleAnalyticsObject = l;
-            b[l] || (b[l] =
-                function() {
-                    (b[l].q = b[l].q || []).push(arguments)
-                });
-            b[l].l = +new Date;
-            e = o.createElement(i);
-            r = o.getElementsByTagName(i)[0];
-            e.src = '//www.google-analytics.com/analytics.js';
-            r.parentNode.insertBefore(e, r)
-        }(window, document, 'script', 'ga'));
-        ga('create', 'UA-XXXXX-X');
-        ga('send', 'pageview');
-    </script>
-</body>
+    
 
 </html>
