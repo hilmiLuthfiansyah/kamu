@@ -1,12 +1,14 @@
 <?php
    session_start();
-   if(!$_SESSION['is_logged_in']){
+   if(!$_SESSION['is_logged_in'] && !$_SESSION['role']=='pegawai'){
        echo "<script>
      window.location = 'login.php';
      </script>";
-   }
+	}
 	include 'koneksi.php';  
-	$sql="select * from user";  
+	$sql="
+		SELECT * FROM 
+			user";  
 	$hasil=mysqli_query($conn,$sql);
 ?>
     <!DOCTYPE html>
@@ -220,7 +222,7 @@
                                                 <?php echo $data['tanggungan'];?>
                                             </td>
                                             <td>
-                                                <a href=<?php echo "form-edit.php?id_user=", $data[ 'id_user']; ?>>Edit</a>
+                                                <a href=<?php echo "edit-nasabah.php?id_user=", $data[ 'id_user']; ?>>Edit</a>
                                                 <a style="color: red;" href=<?php echo "hapus.php?id_user=", $data[ 'id_user']; ?>>Delete</a>
                                             </td>
                                         </tr>

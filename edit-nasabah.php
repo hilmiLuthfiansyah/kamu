@@ -1,21 +1,24 @@
 <?php
     include 'koneksi.php';
+    
     session_start();
     if(!$_SESSION['is_logged_in']){
         echo "<script>
         window.location = 'login.php';
         </script>";
-    }     
-    $nip        = $_GET['nip'];
+    }
+
+    $id_user = $_GET['id_user'];
     $query = "
         SELECT * FROM 
-            admin
+            user
         WHERE
-            id = '$nip';
-    ";
-
+            id_user = '$id_user';
+    "; 
+    
     $result = mysqli_query($conn, $query);
     $data = mysqli_fetch_array($result);
+
 ?>
 
     <!DOCTYPE html>
@@ -158,42 +161,69 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card">
-                            <div class="card-body">
-                                <p>Silahkan rubah data yang diperlukan</p>
-                                <form class="form-horizontal" action="simpanubahP.php" method="post">
-                                    <input type="hidden" name="id" class="form-control" value="<?php echo $data['id'];?>">
-                                    <div class="row">
-                                        <div class="col-lg-6" style="margin-bottom:0px;">
-                                            <div class="form-group">
-                                                <label>Nama Lengkap</label>
-                                                <input type="text" name="nama" class="form-control" value="<?php echo $data['nama'];?>">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header d-flex align-items-center">
+                                    <h2 class="h5 display display">Masukkan Data Pemohon Kredit</h2>
+                                </div>
+                                <div class="card-body">
+                                    <p>Silahkan masukkan data yang diperlukan:</p>
+                                    <form action="edit-nasabah-proses.php" method="post">
+                                        <div class="row">
+                                            <div class="col-lg-6" style="margin-bottom:0px;">
+                                                <div class="form-group">
+                                                    <label>ID Nasabah</label>
+                                                    <input type="text" name="x" placeholder="ID Nasabah" class="form-control" disabled value="<?php echo $data['id_user'];?>">
+                                                    <input type="hidden" name="id_user" placeholder="ID Nasabah" class="form-control" value="<?php echo $data['id_user'];?>">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6" style="margin-bottom:0px;">
+                                                <div class="form-group">
+                                                    <label>Nama Lengkap</label>
+                                                    <input type="text" name="nama" placeholder="Nama Lengkap" class="form-control" value="<?php echo $data['nama'];?>">
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6" style="margin-bottom:0px;">
-                                            <div class="form-group">
-                                                <label>Jabatan</label>
-                                                <input type="text" name="jabatan" class="form-control" value="<?php echo $data['jabatan'];?>">
+                                        <div class="row">
+                                            <div class="col-lg-6" style="margin-bottom:0px;">
+                                                <div class="form-group">
+                                                    <label>Pekerjaan</label>
+                                                    <input type="text" name="pekerjaan" placeholder="Pekerjaan" class="form-control" value="<?php echo $data['pekerjaan'];?>">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6" style="margin-bottom:0px;">
+                                                <div class="form-group">
+                                                    <label>Penghasilan</label>
+                                                    <input type="text" name="penghasilan" placeholder="Penghasilan/Bulan" class="form-control" value="<?php echo $data['penghasilan'];?>">
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-12" style="margin-bottom:0px;">
-                                            <div class="form-group">
-                                                <label>Alamat</label>
-                                                <textarea style="min-height: 100px; max-height: 200px;" name="alamat" placeholder="Alamat Anda" class="form-control" > <?php echo $data['alamat'];?></textarea>
+                                        <div class="row">
+                                            <div class="col-lg-6" style="margin-bottom:0px;">
+                                                <div class="form-group">
+                                                    <label>Tanggungan</label>
+                                                    <input type="text" name="tanggungan" placeholder="Tanggungan" class="form-control" value="<?php echo $data['tanggungan'];?>">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6" style="margin-bottom:0px;">
+                                                <div class="form-group">
+                                                    <label>Umur</label>
+                                                    <input type="text" name="umur" placeholder="Umur" class="form-control" value="<?php echo $data['umur'];?>">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
                                         <div class="form-group">
-                                            <input type="submit" name="submit" value="Update" class="btn btn-primary">
+                                            <label>Alamat</label>
+                                            <textarea style="min-height: 100px; max-height: 200px;" name="alamat" placeholder="Alamat" class="form-control"><?php echo $data['alamat'];?></textarea>
                                         </div>
-                                </form>
+                                        <div class="form-group">
+                                            <input type="submit" name="submit" value="Tambahkan" class="btn btn-primary">
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
             <footer class="main-footer">
                 <div class="container-fluid">
