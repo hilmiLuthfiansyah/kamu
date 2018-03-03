@@ -8,7 +8,7 @@
 	include 'koneksi.php';  
 	$sql="
 		SELECT * FROM 
-			user";  
+			kredit";  
 	$hasil=mysqli_query($conn,$sql);
 ?>
     <!DOCTYPE html>
@@ -110,13 +110,13 @@
                                 </a>
                             </li>
                             <?php } else {?>
-                            <li class="active">
+                            <li >
                                 <a href="nasabah.php">
                                     <i class="icon-form"></i>
                                     <span>Data Nasabah</span>
                                 </a>
                             </li>
-                            <li>
+                            <li class="active"> 
                                 <a href="transaksi-kredit.php">
                                     <i class="icon-form"></i>
                                     <span>Transkasi Kredit</span>
@@ -166,7 +166,7 @@
                 <div class="container-fluid">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item active">
-                            <h3>Data Pemohon Kredit Terdaftar</h3>
+                            <h3>Transaksi Kredit </h3>
                         </li>
                     </ul>
                 </div>
@@ -180,12 +180,9 @@
                                     <tr>
                                         <th>No.</th>
                                         <th>ID Nasabah</th>
-                                        <th>Nama Lengkap</th>
-                                        <th>Alamat</th>
-                                        <th>Pekerjaan</th>
-                                        <th>Umur</th>
-                                        <th>Penghasilan/Bulan</th>
-                                        <th>Tanggungan</th>
+                                        <th>Pengajuan Kredit</th>
+                                        <th>Waktu Pengembalian</th>
+                                        <th>Jaminan</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -204,26 +201,17 @@
                                                 <?php echo $data['id_user'];?>
                                             </td>
                                             <td>
-                                                <?php echo $data['nama'];?>
+                                                <?php echo $data['pengajuan'];?>
                                             </td>
                                             <td>
-                                                <?php echo $data['alamat'];?>
+                                                <?php echo $data['waktu_pengembalian'];?>
                                             </td>
                                             <td>
-                                                <?php echo $data['pekerjaan'];?>
+                                                <?php echo $data['jaminan'];?>
                                             </td>
                                             <td>
-                                                <?php echo $data['umur'];?>
-                                            </td>
-                                            <td>
-                                                <?php echo $data['penghasilan'];?>
-                                            </td>
-                                            <td>
-                                                <?php echo $data['tanggungan'];?>
-                                            </td>
-                                            <td>
-                                                <a href=<?php echo "edit-nasabah.php?id_user=", $data[ 'id_user']; ?>>Edit</a>
-                                                <a style="color: red;" href=<?php echo "hapus-nasabah.php?id_user=", $data[ 'id_user']; ?>>Delete</a>
+                                                <a href=<?php echo "edit-kredit.php?id_kredit=", $data[ 'id_kredit']; ?>>Edit</a>
+                                                <a style="color: red;" href=<?php echo "hapus-kredit.php?id_kredit=", $data[ 'id_kredit']; ?>>Delete</a>
                                             </td>
                                         </tr>
                                         <?php
@@ -242,7 +230,7 @@
                                 </div>
                                 <div class="card-body">
                                     <p>Silahkan masukkan data yang diperlukan:</p>
-                                    <form action="tambahN.php" method="post">
+                                    <form action="tambah-kredit.php" method="post">
                                         <div class="row">
                                             <div class="col-lg-6" style="margin-bottom:0px;">
                                                 <div class="form-group">
@@ -252,42 +240,24 @@
                                             </div>
                                             <div class="col-lg-6" style="margin-bottom:0px;">
                                                 <div class="form-group">
-                                                    <label>Nama Lengkap</label>
-                                                    <input type="text" name="nama" placeholder="Nama Lengkap" class="form-control">
+                                                    <label>Pengajuan Kredit</label>
+                                                    <input type="text" name="pengajuan" placeholder="Pengajuan Kredit/Bulan" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-6" style="margin-bottom:0px;">
                                                 <div class="form-group">
-                                                    <label>Pekerjaan</label>
-                                                    <input type="text" name="pekerjaan" placeholder="Pekerjaan" class="form-control">
+                                                    <label>Waktu Pengembalian</label>
+                                                    <input type="text" name="waktu_pengembalian" placeholder="Waktu Pengembalian/Bulan" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6" style="margin-bottom:0px;">
                                                 <div class="form-group">
-                                                    <label>Penghasilan</label>
-                                                    <input type="text" name="penghasilan" placeholder="Penghasilan/Bulan" class="form-control">
+                                                    <label>Jaminan</label>
+                                                    <input type="text" name="jaminan" placeholder="Jaminan" class="form-control">
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-6" style="margin-bottom:0px;">
-                                                <div class="form-group">
-                                                    <label>Tanggungan</label>
-                                                    <input type="text" name="tanggungan" placeholder="Tanggungan" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6" style="margin-bottom:0px;">
-                                                <div class="form-group">
-                                                    <label>Umur</label>
-                                                    <input type="text" name="umur" placeholder="Umur" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Alamat</label>
-                                            <textarea style="min-height: 100px; max-height: 200px;" name="alamat" placeholder="Alamat" class="form-control"></textarea>
                                         </div>
                                         <div class="form-group">
                                             <input type="submit" name="submit" value="Tambahkan" class="btn btn-primary">

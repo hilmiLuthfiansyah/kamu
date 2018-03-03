@@ -93,10 +93,24 @@
                               <span>Data Pegawai</span>
                            </a></li>
                         <?php } else {?>
-                        <li > <a href="nasabah.php"><i class="icon-form"></i><span>Data Nasabah</span></a></li>
-                        <li> <a href="nasabah.php"><i class="icon-form"></i><span>Transaksi Kredit</span></a></li>
-                        <li> <a href="keputusan.php"><i class="icon-presentation"></i><span>Keputusan</span></a></li>
-                    </ul>
+                        <li>
+                                <a href="nasabah.php">
+                                    <i class="icon-form"></i>
+                                    <span>Data Nasabah</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="nasabah.php">
+                                    <i class="icon-form"></i>
+                                    <span>Transkasi Kredit</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="keputusan.php">
+                                    <i class="icon-presentation"></i>
+                                    <span>Keputusan</span>
+                                </a>
+                            
                 </div>
                         <?php }?>
             </div>
