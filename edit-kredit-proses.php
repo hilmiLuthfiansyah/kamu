@@ -2,7 +2,7 @@
     include 'koneksi.php';
 
     session_start();
-    if(!$_SESSION['is_logged_in']){
+    if(!$_SESSION['is_logged_in']&& !$_SESSION['role']=='pegawai')){
         echo "<script>
         window.location = 'login.php';
         </script>";
@@ -25,7 +25,7 @@
         WHERE
             id_kredit='$id_kredit';
         ";
-        
+            
     if (!mysqli_query($conn,$query)){
         echo "Gagal";         	
         header('location:transaksi-kredit.php'); 

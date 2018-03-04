@@ -119,7 +119,7 @@
                             <li class="active"> 
                                 <a href="transaksi-kredit.php">
                                     <i class="icon-form"></i>
-                                    <span>Transkasi Kredit</span>
+                                    <span>Transaksi Kredit</span>
                                 </a>
                             </li>
                             <li>
@@ -137,36 +137,36 @@
         <div class="page forms-page">
             <!-- navbar-->
             <header class="header">
-                <nav class="navbar">
-                    <div class="container-fluid">
-                        <div class="navbar-holder d-flex align-items-center justify-content-between">
-                            <div class="navbar-header">
-                                <a id="toggle-btn" href="#" class="menu-btn">
-                                    <i class="icon-bars"> </i>
-                                </a>
-                                <a href="index.php" class="navbar-brand">
-                                    <div class="brand-text d-none d-md-inline-block">
-                                        <span>Halaman Pegawai </span>
-                                        <strong class="text-primary"> BPR Majalengka</strong>
-                                    </div>
-                                </a>
-                            </div>
-                            <ul class="nav">
-                                <li class="nav-item">
-                                    <a href="logout.php" class="nav-link logout">Logout
-								<i class="fa fa-sign-out"></i>
-							</a>
-                                </li>
-                            </ul>
+            <nav class="navbar">
+                <div class="container-fluid">
+                    <div class="navbar-holder d-flex align-items-center justify-content-between">
+                        <div class="navbar-header">
+                            <a id="toggle-btn" href="#" class="menu-btn">
+                                <i class="icon-bars"> </i>
+                            </a>
+                            <a href="index.php" class="navbar-brand">
+                                <div class="brand-text d-none d-md-inline-block">
+                                    <span>Halaman Pegawai </span>
+                                    <strong class="text-primary"> BPR Majalengka</strong>
+                                </div>
+                            </a>
                         </div>
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <a href="logout.php" class="nav-link logout">Logout
+                            <i class="fa fa-sign-out"></i>
+                        </a>
+                            </li>
+                        </ul>
                     </div>
-                </nav>
-            </header>
+                </div>
+            </nav>
+        </header>
             <div class="breadcrumb-holder">
                 <div class="container-fluid">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item active">
-                            <h3>Transaksi Kredit </h3>
+                            <h3>Data Transaksi Kredit </h3>
                         </li>
                     </ul>
                 </div>
@@ -211,7 +211,8 @@
                                             </td>
                                             <td>
                                                 <a href=<?php echo "edit-kredit.php?id_kredit=", $data[ 'id_kredit']; ?>>Edit</a>
-                                                <a style="color: red;" href=<?php echo "hapus-kredit.php?id_kredit=", $data[ 'id_kredit']; ?>>Delete</a>
+                                                <a style="color: red;" onclick="return confirm('Hapus Data?');"href=<?php echo "hapus-kredit.php?id_kredit=", $data[ 'id_kredit']; ?>>Delete</a>
+                                               
                                             </td>
                                         </tr>
                                         <?php

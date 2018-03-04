@@ -1,7 +1,7 @@
 <?php
     include 'koneksi.php';
     session_start();
-    if(!$_SESSION['is_logged_in']){
+    if(!$_SESSION['is_logged_in']&& !$_SESSION['role']=='admin'){
         echo "<script>
         window.location = 'login.php';
         </script>";
@@ -60,10 +60,11 @@
                     <div class="sidenav-header-inner text-center">
                         <alt="person" class="img-fluid rounded-circle">
                             <h2 class="h5 text">BPR Majalengka</h2>
-                            <span class="text-uppercase">Pegawai</span>
+                            <span class="text-uppercase">Jawa barat</span>
                     </div>
                     <div class="sidenav-header-logo">
-                        <a href="index.html" class="brand-small text-center">
+                    
+                        <a href="index.php" class="brand-small text-center">
                             <strong class="text-primary">BPR</strong>
                         </a>
                     </div>
@@ -71,10 +72,26 @@
                 <div class="main-menu">
                     <ul id="side-main-menu" class="side-menu list-unstyled">
                         <li>
-                            <a href="index.html">
+                            <a href="index.php">
                                 <i class="icon-home"></i>
                                 <span>Beranda</span>
                             </a>
+                        </li>
+                        <li>  <a href="#pages-nav-list" data-toggle="collapse" aria-expanded="false">
+                        <i class="icon-interface-windows"></i>
+                        <span>Kriteria Keputusan</span>
+                        <div class="arrow pull-right">
+                           <i class="fa fa-angle-down"></i>
+                        </div>
+                     </a>
+                            <ul id="pages-nav-list" class="collapse list-unstyled">
+                                <li> <a href="#">Penghasilan</a></li>
+                                <li> <a href="#">Pengajuan Kredit</a></li>
+                                <li> <a href="#">Jangka Waktu</a></li>
+                                <li> <a href="#">Agunan</a></li>
+                                <li> <a href="#">Umur</a></li>
+                                <li> <a href="#">Tanggungan</a></li>
+                            </ul>
                         </li>
                         <li class="active">
                             <a href="forms.php">
@@ -82,39 +99,12 @@
                                 <span>Data Pegawai</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="nasabah.php">
-                                <i class="icon-form"></i>
-                                <span>Data Pemohon Kredit</span>
-                            </a>
-                        </li>
+                        
                     </ul>
                 </div>
                 <div class="admin-menu">
                     <ul id="side-admin-menu" class="side-menu list-unstyled">
-                        <li>
-                            <a href="#pages-nav-list" data-toggle="collapse" aria-expanded="false">
-                                <i class="icon-interface-windows"></i>
-                                <span>Dropdown</span>
-                                <div class="arrow pull-right">
-                                    <i class="fa fa-angle-down"></i>
-                                </div>
-                            </a>
-                            <ul id="pages-nav-list" class="collapse list-unstyled">
-                                <li>
-                                    <a href="#">Page 1</a>
-                                </li>
-                                <li>
-                                    <a href="#">Page 2</a>
-                                </li>
-                                <li>
-                                    <a href="#">Page 3</a>
-                                </li>
-                                <li>
-                                    <a href="#">Page 4</a>
-                                </li>
-                            </ul>
-                        </li>
+                        
 
                     </ul>
                 </div>
@@ -123,33 +113,34 @@
         <div class="page forms-page">
             <!-- navbar-->
             <header class="header">
-                <nav class="navbar">
-                    <div class="container-fluid">
-                        <div class="navbar-holder d-flex align-items-center justify-content-between">
-                            <div class="navbar-header">
-                                <a id="toggle-btn" href="#" class="menu-btn">
-                                    <i class="icon-bars"> </i>
-                                </a>
-                                <a href="index.html" class="navbar-brand">
-                                    <div class="brand-text d-none d-md-inline-block">
-                                        <span>Halaman Pegawai </span>
-                                        <strong class="text-primary"> BPR Majalengka</strong>
-                                    </div>
-                                </a>
-                            </div>
+            <nav class="navbar">
+               <div class="container-fluid">
+                  <div class="navbar-holder d-flex align-items-center justify-content-between">
+                     <div class="navbar-header">
+                        <a id="toggle-btn" href="#" class="menu-btn">
+                           <i class="icon-bars"> </i>
+                        </a>
+                        <a href="index.php" class="navbar-brand">
+                        <div class="brand-text d-none d-md-inline-block"><span>Halaman 
+                            <?php if ($_SESSION['role']== 'admin'){
+                                echo "Administrator";
+                            }else{
+                                echo "Pegawai";
+                            } ?>
+                        </span><strong class="text-primary">   BPR Majalengka</strong></div>
+                    </a>
+                     </div>
 
-                            </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="login.html" class="nav-link logout">Logout
-                                    <i class="fa fa-sign-out"></i>
-                                </a>
-                            </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-            </header>
+                     </ul>
+                         <ul class="nav">
+                             <li class="nav-item"><a href="logout.php" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a></li>
+                         </ul>
+
+                     
+                  </div>
+               </div>
+            </nav>
+         </header>
             <div class="breadcrumb-holder">
                 <div style="padding-left: 20px;" class="container-fluid">
                     <ul class="breadcrumb">
@@ -162,7 +153,7 @@
                     <div class="card">
                         <div class="card">
                             <div class="card-body">
-                                <p>Silahkan rubah data yang diperlukan</p>
+                                <p>Silahkan ubah data yang diperlukan</p>
                                 <form class="form-horizontal" action="simpanubahP.php" method="post">
                                     <input type="hidden" name="id" class="form-control" value="<?php echo $data['id'];?>">
                                     <div class="row">

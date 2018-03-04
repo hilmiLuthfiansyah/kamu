@@ -1,6 +1,6 @@
 <?php
    session_start();
-   if(!$_SESSION['is_logged_in']){
+   if(!$_SESSION['is_logged_in']&& !$_SESSION['role']=='pegawai'){
        echo "<script>
      window.location = 'login.php';
      </script>";
@@ -100,9 +100,9 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="nasabah.php">
+                                <a href="transaksi-kredit.php">
                                     <i class="icon-form"></i>
-                                    <span>Transkasi Kredit</span>
+                                    <span>Transaksi Kredit</span>
                                 </a>
                             </li>
                             <li>
@@ -110,7 +110,7 @@
                                     <i class="icon-presentation"></i>
                                     <span>Keputusan</span>
                                 </a>
-                            
+                            </li>
                 </div>
                         <?php }?>
             </div>
@@ -132,7 +132,7 @@
                             }else{
                                 echo "Pegawai";
                             } ?>
-                        </span><strong class="text-primary">   BPR Majalengka</strong></div>
+                        </span><strong class="text-primary">     BPR Majalengka</strong></div>
                     </a>
                      </div>
 

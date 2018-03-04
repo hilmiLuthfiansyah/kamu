@@ -2,7 +2,7 @@
     include 'koneksi.php';
     
     session_start();
-    if(!$_SESSION['is_logged_in']){
+    if(!$_SESSION['is_logged_in']&& !$_SESSION['role']=='pegawai'){
         echo "<script>
         window.location = 'login.php';
         </script>";
@@ -63,10 +63,10 @@
                     <div class="sidenav-header-inner text-center">
                         <alt="person" class="img-fluid rounded-circle">
                             <h2 class="h5 text">BPR Majalengka</h2>
-                            <span class="text-uppercase">Pegawai</span>
+                            <span class="text-uppercase">jawa barat</span>
                     </div>
                     <div class="sidenav-header-logo">
-                        <a href="index.html" class="brand-small text-center">
+                        <a href="index.php" class="brand-small text-center">
                             <strong class="text-primary">BPR</strong>
                         </a>
                     </div>
@@ -74,7 +74,7 @@
                 <div class="main-menu">
                     <ul id="side-main-menu" class="side-menu list-unstyled">
                         <li>
-                            <a href="index.html">
+                            <a href="index.php">
                                 <i class="icon-home"></i>
                                 <span>Beranda</span>
                             </a>
@@ -82,44 +82,26 @@
                         <li class="active">
                             <a href="forms.php">
                                 <i class="icon-form"></i>
-                                <span>Data Pegawai</span>
+                                <span>Data Nasabah</span>
                             </a>
                         </li>
                         <li>
-                            <a href="nasabah.php">
+                            <a href="transaksi-kredit.php">
                                 <i class="icon-form"></i>
-                                <span>Data Pemohon Kredit</span>
+                                <span>Transaksi Kredit</span>
                             </a>
                         </li>
+                   
+                     <li>
+                                <a href="keputusan.php">
+                                    <i class="icon-presentation"></i>
+                                    <span>Keputusan</span>
+                                </a>
+                
+                        </li>
+                        </ul>
                     </ul>
                 </div>
-                <div class="admin-menu">
-                    <ul id="side-admin-menu" class="side-menu list-unstyled">
-                        <li>
-                            <a href="#pages-nav-list" data-toggle="collapse" aria-expanded="false">
-                                <i class="icon-interface-windows"></i>
-                                <span>Dropdown</span>
-                                <div class="arrow pull-right">
-                                    <i class="fa fa-angle-down"></i>
-                                </div>
-                            </a>
-                            <ul id="pages-nav-list" class="collapse list-unstyled">
-                                <li>
-                                    <a href="#">Page 1</a>
-                                </li>
-                                <li>
-                                    <a href="#">Page 2</a>
-                                </li>
-                                <li>
-                                    <a href="#">Page 3</a>
-                                </li>
-                                <li>
-                                    <a href="#">Page 4</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                    </ul>
                 </div>
             </div>
         </nav>
@@ -143,11 +125,9 @@
 
                             </ul>
                             </li>
-                            <li class="nav-item">
-                                <a href="login.html" class="nav-link logout">Logout
-                                    <i class="fa fa-sign-out"></i>
-                                </a>
-                            </li>
+                            <ul class="nav">
+                            <li class="nav-item"><a href="logout.php" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a></li>
+                        </ul>
                             </ul>
                         </div>
                     </div>
@@ -163,11 +143,9 @@
             <div class="row">
                         <div class="col-lg-12">
                             <div class="card">
-                                <div class="card-header d-flex align-items-center">
-                                    <h2 class="h5 display display">Masukkan Data Pemohon Kredit</h2>
-                                </div>
+                                
                                 <div class="card-body">
-                                    <p>Silahkan masukkan data yang diperlukan:</p>
+                                    <p>Silahkan ubah data yang diperlukan:</p>
                                     <form action="edit-nasabah-proses.php" method="post">
                                         <div class="row">
                                             <div class="col-lg-6" style="margin-bottom:0px;">
@@ -217,7 +195,7 @@
                                             <textarea style="min-height: 100px; max-height: 200px;" name="alamat" placeholder="Alamat" class="form-control"><?php echo $data['alamat'];?></textarea>
                                         </div>
                                         <div class="form-group">
-                                            <input type="submit" name="submit" value="Tambahkan" class="btn btn-primary">
+                                            <input type="submit" name="submit" value="Update" class="btn btn-primary">
                                         </div>
                                     </form>
                                 </div>
