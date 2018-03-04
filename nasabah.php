@@ -122,12 +122,6 @@
                                     <span>Transaksi Kredit</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="keputusan.php">
-                                    <i class="icon-presentation"></i>
-                                    <span>Keputusan</span>
-                                </a>
-                            </li>
                     </ul>
                 </div>
                 <?php }?>

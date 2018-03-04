@@ -1,9 +1,15 @@
 <?php
    session_start();
-   if(!$_SESSION['is_logged_in']&& !$_SESSION['role']=='admin'){
+   if(!$_SESSION['is_logged_in'] ){
        echo "<script>
      window.location = 'login.php';
      </script>";
+   }else{
+      if (!($_SESSION['role']=="admin")){
+         echo "<script>
+         window.location = 'index.php';
+         </script>";  
+      }
    }
    include 'koneksi.php';  
    $sql="SELECT * FROM aturan";
