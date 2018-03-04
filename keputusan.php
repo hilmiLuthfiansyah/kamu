@@ -170,7 +170,7 @@
                                     <td>
                                     <a href= <?php echo "edit-keputusan.php?id=", $data['id']; ?>>Edit</a>
                                       
-                                      <a style="color: red;" onclick="return confirm('Hapus Data?');"href=<?php echo "hapus.php?nip=", $data['id']; ?>>Delete</a>
+                                      <a style="color: red;" onclick="return confirm('Hapus Data?');"href=<?php echo "hapus-keputusan.php?id=", $data['id']; ?>>Delete</a>
                                     </td>
                                  </tr>
                                  <?php
