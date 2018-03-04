@@ -74,33 +74,10 @@
                 if($role){
                 ?>
                         <li>
-                           <a href="#pages-nav-list" data-toggle="collapse" aria-expanded="false">
+                           <a href="keputusan.php"  aria-expanded="false">
                               <i class="icon-interface-windows"></i>
                               <span>Kriteria Keputusan</span>
-                              <div class="arrow pull-right">
-                                 <i class="fa fa-angle-down"></i>
-                              </div>
                            </a>
-                           <ul id="pages-nav-list" class="collapse list-unstyled">
-                              <li>
-                                 <a href="#">Penghasilan</a>
-                              </li>
-                              <li>
-                                 <a href="#">Pengajuan Kredit</a>
-                              </li>
-                              <li>
-                                 <a href="#">Jangka Waktu</a>
-                              </li>
-                              <li>
-                                 <a href="#">Agunan</a>
-                              </li>
-                              <li>
-                                 <a href="#">Umur</a>
-                              </li>
-                              <li>
-                                 <a href="#">Tanggungan</a>
-                              </li>
-                           </ul>
                         </li>
                         <li class="active">
                            <a href="pegawai.php">

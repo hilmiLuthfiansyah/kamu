@@ -2,7 +2,7 @@
     include 'koneksi.php';
 
     session_start();
-    if(!$_SESSION['is_logged_in'] && !$_SESSION['role']=='pegawai')){
+    if(!$_SESSION['is_logged_in'] && !$_SESSION['role']=='pegawai'){
         echo "<script>
         window.location = 'login.php';
         </script>";
