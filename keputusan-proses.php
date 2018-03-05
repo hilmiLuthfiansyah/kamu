@@ -14,6 +14,7 @@
     $sedang_bb = $_POST['sedang-bb'];
     $sedang_ba = $_POST['sedang-ba'];
     $tinggi_bb = $_POST['tinggi-bb'];
+    $tinggi_ba = $_POST['tinggi-ba'];
     $query= "
         INSERT INTO  
             aturan
@@ -23,7 +24,8 @@
             rendah_ba,
             sedang_bb,
             sedang_ba,
-            tinggi_bb
+            tinggi_bb,
+            tinggi_ba
             )
         VALUES(                
             '$nama',
@@ -31,7 +33,8 @@
             '$rendah_ba',
             '$sedang_bb',
             '$sedang_ba',
-            '$tinggi_bb'
+            '$tinggi_bb',
+            '$tinggi_ba'
         );";
     if (!mysqli_query($conn,$query)){
         echo "Gagal";         	

@@ -6,14 +6,17 @@
      </script>";
 	}
 	include 'koneksi.php';  
-	$sql="
+	$sql = "
 		SELECT * FROM 
-			kredit";  
-	$hasil=mysqli_query($conn,$sql);
+            kredit";
+    $hasil = mysqli_query($conn,$sql);
+    $k_query = "
+        SELECT * FROM 
+            aturan";
+    $kriteria = mysqli_query($conn,$k_query);
 ?>
     <!DOCTYPE html>
     <html>
-
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -227,32 +230,26 @@
                                     <p>Silahkan masukkan data yang diperlukan:</p>
                                     <form action="tambah-kredit.php" method="post">
                                         <div class="row">
-                                            <div class="col-lg-6" style="margin-bottom:0px;">
+                                            <div class="col-lg-12" style="margin-bottom:0px;">
                                                 <div class="form-group">
                                                     <label>ID Nasabah</label>
                                                     <input type="text" name="id_user" placeholder="ID Nasabah" class="form-control">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6" style="margin-bottom:0px;">
-                                                <div class="form-group">
-                                                    <label>Pengajuan Kredit</label>
-                                                    <input type="text" name="pengajuan" placeholder="Pengajuan Kredit/Bulan" class="form-control">
-                                                </div>
-                                            </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-lg-6" style="margin-bottom:0px;">
-                                                <div class="form-group">
-                                                    <label>Waktu Pengembalian</label>
-                                                    <input type="text" name="waktu_pengembalian" placeholder="Waktu Pengembalian/Bulan" class="form-control">
+                                        <?php 
+                                            while($d = mysqli_fetch_array($kriteria)){
+                                                echo "
+                                                <div class='col-lg-6' style='margin-bottom:0px;'>
+                                                    <div class='form-group'>
+                                                        <label>",$d['nama'],"</label>
+                                                        <input type='text' name='", $d['nama'],"'placeholder='",$d['nama'],"' class='form-control'>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-6" style="margin-bottom:0px;">
-                                                <div class="form-group">
-                                                    <label>Jaminan</label>
-                                                    <input type="text" name="jaminan" placeholder="Jaminan" class="form-control">
-                                                </div>
-                                            </div>
+                                                ";
+                                            }
+                                        ?>
                                         </div>
                                         <div class="form-group">
                                             <input type="submit" name="submit" value="Tambahkan" class="btn btn-primary">

@@ -136,11 +136,12 @@
                               <tr>
                                  <th>No.</th>
                                  <th>Nama Kriteria</th>
-                                 <th>BB Rendah</th>
-                                 <th>BA Rendah</th>
-                                 <th>BB Sedang</th>
-                                 <th>BA Sedang</th>
-                                 <th>BB Tinggi</th>
+                                 <th>BB tidak diharapkan</th>
+                                 <th>BA tidak diharpkan</th>
+                                 <th>BB dipertimbangkan</th>
+                                 <th>BA dipertimbangkan</th>
+                                 <th>BB diharapkan</th>
+                                 <th>BA diharapkan</th>
                                  <th>Action</th>
                               </tr>
                            </thead>
@@ -174,6 +175,9 @@
                                        <?php echo $data['tinggi_bb'];?>
                                     </td>
                                     <td>
+                                       <?php echo $data['tinggi_ba'];?>
+                                    </td>
+                                    <td>
                                     <a href= <?php echo "edit-keputusan.php?id=", $data['id']; ?>>Edit</a>
                                       
                                       <a style="color: red;" onclick="return confirm('Hapus Data?');"href=<?php echo "hapus-keputusan.php?id=", $data['id']; ?>>Delete</a>
@@ -205,7 +209,7 @@
                                  </div>
                                  <div class="row">
                                     <div class="col-lg-12" style="margin-bottom:0px;">
-                                       <label> Rendah</label>
+                                       <label> Tidak Diharapkan</label>
                                     </div>
                                     <div class="col-lg-6" style="margin-bottom:0px;">
                                        <div class="form-group">
@@ -220,7 +224,7 @@
                                  </div>
                                  <div class="row">
                                     <div class="col-lg-12" style="margin-bottom:0px;">
-                                       <label> Sedang</label>
+                                       <label> Dipertimbangkan</label>
                                     </div>
                                     <div class="col-lg-6" style="margin-bottom:0px;">
                                        <div class="form-group">
@@ -235,9 +239,16 @@
                                  </div>
                                  <div class="row">
                                     <div class="col-lg-12" style="margin-bottom:0px;">
-                                       <label> Tinggi</label>
+                                       <label> Diharapkan</label>
+                                    </div>
+                                    <div class="col-lg-6" style="margin-bottom:0px;">
                                        <div class="form-group">
-                                          <input type="text" name="tinggi-bb" placeholder="Batas bawah" class="form-control">
+                                       <input type="text" name="tinggi-bb" placeholder="Batas bawah" class="form-control">
+                                       </div>
+                                    </div>
+                                    <div class="col-lg-6" style="margin-bottom:0px;">
+                                       <div class="form-group">
+                                       <input type="text" name="tinggi-ba" placeholder="Batas atas" class="form-control">
                                        </div>
                                     </div>
                                  </div>
