@@ -14,6 +14,9 @@
         SELECT * FROM 
             aturan";
     $kriteria = mysqli_query($conn,$k_query);
+    $tanggungan = false;
+    $penghasilan = false;
+    $umur = false;
 ?>
     <!DOCTYPE html>
     <html>
@@ -233,21 +236,54 @@
                                             <div class="col-lg-12" style="margin-bottom:0px;">
                                                 <div class="form-group">
                                                     <label>ID Nasabah</label>
-                                                    <input type="text" name="id_user" placeholder="ID Nasabah" class="form-control">
+                                                    <input onchange="userDetail(this.value)"type="text" name="id_user" placeholder="ID Nasabah" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                         <?php 
                                             while($d = mysqli_fetch_array($kriteria)){
-                                                echo "
-                                                <div class='col-lg-6' style='margin-bottom:0px;'>
-                                                    <div class='form-group'>
-                                                        <label>",$d['nama'],"</label>
-                                                        <input type='text' name='", $d['nama'],"'placeholder='",$d['nama'],"' class='form-control'>
+                                                $nama = strtolower($d['nama']);
+                                                if ($nama== "tanggungan"){
+                                                    $tanggungan = true;
+                                                    echo "
+                                                    <div class='col-lg-6' style='margin-bottom:0px;'>
+                                                        <div class='form-group'>
+                                                            <label>",$nama,"</label>
+                                                            <input type='text' name='", $nama,"' id='",$nama,"' placeholder='",$nama,"' class='form-control' >
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                ";
+                                                    ";
+                                                } else if(nama== "umur"){
+                                                    $umur = true;
+                                                    echo "
+                                                    <div class='col-lg-6' style='margin-bottom:0px;'>
+                                                        <div class='form-group'>
+                                                            <label>",$nama,"</label>
+                                                            <input type='text' name='", $nama,"' id='",$nama,"' placeholder='",$nama,"' class='form-control'  >
+                                                        </div>
+                                                    </div>
+                                                    ";
+                                                } else if($nama == "penghasilan"){
+                                                    $penghasilan = true;
+                                                    echo "
+                                                    <div class='col-lg-6' style='margin-bottom:0px;'>
+                                                        <div class='form-group'>
+                                                            <label>",$nama,"</label>
+                                                            <input type='text' name='", $nama,"' id='",$nama,"' placeholder='",$nama,"' class='form-control'  >
+                                                        </div>
+                                                    </div>
+                                                    ";
+                                                }else{
+                                                    echo "
+                                                    <div class='col-lg-6' style='margin-bottom:0px;'>
+                                                        <div class='form-group'>
+                                                            <label>",$d['nama'],"</label>
+                                                            <input type='text' id='",$d['nama'],"' name='", $d['nama'],"'placeholder='",$d['nama'],"' class='form-control' >
+                                                        </div>
+                                                    </div>
+                                                    ";
+                                                }
                                             }
                                         ?>
                                         </div>
@@ -288,6 +324,52 @@
         <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
         <script src="vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
         <script src="js/front.js"></script>
+        <script>
+        function userDetail(str) {
+            penghasilan = '<?php echo $penghasilan ;?>';
+            umur = '<?php echo $umur ;?>';
+            tanggungan = '<?php echo $tanggungan ;?>';
+            if (str.length == 0) { 
+                return;
+            } else {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        const data = JSON.parse(this.responseText);
+                        if(data.status == 200){
+                            if (data.data.penghasilan != null && penghasilan){
+                                document.getElementById("penghasilan").value = data.data.penghasilan;
+                                document.getElementById("penghasilan").readOnly = true;
+                            }
+                            if (data.data.umur != null && umur){
+                                document.getElementById("umur").value = data.data.umur;
+                                document.getElementById("umur").readOnly = true;
+                            }
+                            if (data.data.tanggungan != null && tanggungan){
+                                document.getElementById("tanggungan").value = data.data.tanggungan;
+                                document.getElementById("tanggungan").readOnly = true;
+                            }
+                        }else{
+                            if (tanggungan){
+                                document.getElementById("tanggungan").readOnly = false;
+                                document.getElementById("tanggungan").value = '';
+                            }
+                            if (umur){
+                                document.getElementById("umur").readOnly = false;
+                                document.getElementById("umur").value = '';
+                            }
+                            if (penghasilan){
+                                document.getElementById("penghasilan").readOnly = false;
+                                document.getElementById("penghasilan").value = '';
+                            }
+                        }
+                    }
+                };
+                xmlhttp.open("GET", "nasabah-detail.php?id_user=" + str, true);
+                xmlhttp.send();
+            }
+        }
+</script>
     </body>
 
     </html>
