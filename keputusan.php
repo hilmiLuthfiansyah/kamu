@@ -13,7 +13,10 @@
    }
    include 'koneksi.php';  
    $sql="SELECT * FROM aturan";
+   $sql1="SELECT * FROM keputusan";
    $hasil=mysqli_query($conn,$sql);
+   $keputusan=mysqli_query($conn,$sql1);
+   
 ?>
         <!DOCTYPE html>
         <html>
@@ -123,7 +126,7 @@
                 <div class="breadcrumb-holder">
                <div class="container-fluid">
                   <ul class="breadcrumb">
-                     <li class="breadcrumb-item active"><h3>Data Pegawai Kredit<h3></li>
+                     <li class="breadcrumb-item active"><h3>Keputusan dan Kriteria Kredit<h3></li>
                   </ul>
                </div>
             </div>
@@ -131,6 +134,41 @@
                <div class="container-fluid">
                   <div class="row">
                      <div class="col-lg-12">
+                     <table class="table table-striped">
+                           <thead>
+                              <tr>
+                                 <th>No.</th>
+                                 <th>Dipertimbangkan</th>
+                                 <th>Diharapkan</th>
+                                 <th>Action</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <?php	
+                    $i=0;
+                    while($data=mysqli_fetch_array($keputusan))
+                    {         
+                    $i++;
+                ?>
+                                 <tr>
+                                    <td>
+                                       <?php echo $i;?>
+                                    </td>
+                                    <td>
+                                       <?php echo $data['dipertimbangkan'];?>
+                                    </td>
+                                    <td>
+                                       <?php echo $data['diharapkan'];?>
+                                    </td>
+                                    <td>
+                                    <a href= <?php echo "edit-keputusan-akhir.php?id=", $data['id']; ?>>Edit</a>
+                                    </td>
+                                 </tr>
+                                 <?php
+           }
+           ?>
+                           </tbody>
+                        </table>
                         <table class="table table-striped">
                            <thead>
                               <tr>
@@ -194,7 +232,7 @@
                      <div class="col-lg-12">
                         <div class="card">
                            <div class="card-header d-flex align-items-center">
-                              <h2 class="h5 display display">Tambah Pegawai Kredit</h2>
+                              <h2 class="h5 display display">Masukkan Kriteria Kredit</h2>
                            </div>
                            <div class="card-body">
                               <p>Silahkan masukkan data yang diperlukan:</p>
