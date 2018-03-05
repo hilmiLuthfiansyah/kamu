@@ -196,7 +196,7 @@
                      <div class="col-lg-12">
                         <div class="card">
                            <div class="card-header d-flex align-items-center">
-                              <h2 class="h5 display display">Tambah Pegawai Kredit</h2>
+                              <h2 class="h5 display display">Masukkan Pegawai Kredit</h2>
                            </div>
                            <div class="card-body">
                               <p>Silahkan masukkan data yang diperlukan:</p>
