@@ -7,8 +7,18 @@
 	}
 	include 'koneksi.php';  
 	$sql = "
-		SELECT * FROM 
-            kredit";
+        SELECT 
+            kredit.id_kredit,
+            kredit.keputusan, 
+            kredit.tgl_kredit, 
+            user.id_user, 
+            user.nama
+        FROM 
+            kredit
+        INNER JOIN 
+            user
+        ON
+            user.id_user = kredit.id_user";
     $hasil = mysqli_query($conn,$sql);
     $k_query = "
         SELECT * FROM 
@@ -179,37 +189,37 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>ID Nasabah</th>
-                                        <th>Pengajuan Kredit</th>
-                                        <th>Waktu Pengembalian</th>
-                                        <th>Jaminan</th>
+                                        <th>ID Transaksi</th>
+                                        <th>Nama Nasabah</th>
+                                        <th>Tanggal Kredit</th>
+                                        <th>Keputusan</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php	
 				$i=0;
-				while($data=mysqli_fetch_array($hasil))
-				{         
-				$i++;
-			?>
+				while($data = mysqli_fetch_array($hasil)){         
+				    $i++;
+			    ?>
                                         <tr>
                                             <td>
                                                 <?php echo $i;?>
                                             </td>
                                             <td>
-                                                <?php echo $data['id_user'];?>
+                                                <?php echo $data['id_kredit'];?>
                                             </td>
                                             <td>
-                                                <?php echo $data['pengajuan'];?>
+                                                <?php echo $data['nama'];?>
                                             </td>
                                             <td>
-                                                <?php echo $data['waktu_pengembalian'];?>
+                                                <?php echo $data['tgl_kredit'];?>
                                             </td>
                                             <td>
-                                                <?php echo $data['jaminan'];?>
+                                                <?php echo $data['keputusan'];?>
                                             </td>
                                             <td>
+                                                <a style="color: blue;" href=<?php echo "#"?>>Read</a>
                                                 <a href=<?php echo "edit-kredit.php?id_kredit=", $data[ 'id_kredit']; ?>>Edit</a>
                                                 <a style="color: red;" onclick="return confirm('Hapus Data?');"href=<?php echo "hapus-kredit.php?id_kredit=", $data[ 'id_kredit']; ?>>Delete</a>
                                                
@@ -279,7 +289,7 @@
                                                     <div class='col-lg-6' style='margin-bottom:0px;'>
                                                         <div class='form-group'>
                                                             <label>",$d['nama'],"</label>
-                                                            <input type='text' id='",$d['nama'],"' name='", $d['nama'],"'placeholder='",$d['nama'],"' class='form-control' >
+                                                            <input type='text' id='",$nama,"' name='", $nama,"'placeholder='",$d['nama'],"' class='form-control' >
                                                         </div>
                                                     </div>
                                                     ";

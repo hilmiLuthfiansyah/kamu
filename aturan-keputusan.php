@@ -5,11 +5,15 @@
      window.location = 'login.php';
      </script>";
    }
-?>
-   <?php
+
     include 'koneksi.php';  
-    $sql="SELECT * from admin where role='pegawai'";  
+    $sql="SELECT * from aturan_keputusan;";  
     $hasil=mysqli_query($conn,$sql);
+
+
+    $q_aturan = "SELECT * FROM aturan;";
+    $aturan = mysqli_query($conn,$q_aturan);
+
 ?>
       <!DOCTYPE html>
       <html>
@@ -79,13 +83,13 @@
                               <span>Kriteria Keputusan</span>
                            </a>
                         </li>
-                        <li>
+                        <li class="active">
                            <a href="pegawai.php">
                               <i class="icon-form"></i>
                               <span>Aturan Keputusan</span>
                            </a>
                         </li>
-                        <li class="active">
+                        <li>
                            <a href="pegawai.php">
                               <i class="icon-form"></i>
                               <span>Data Pegawai</span>
@@ -155,10 +159,9 @@
                            <thead>
                               <tr>
                                  <th>No.</th>
-                                 <th>NIP</th>
+                                 <th>Id</th>
                                  <th>Nama</th>
-                                 <th>Alamat</th>
-                                 <th>Jabatan</th>
+                                 <th>Tanggal Dibuat</th>
                                  <th>Action</th>
                               </tr>
                            </thead>
@@ -180,12 +183,10 @@
                                        <?php echo $data['nama'];?>
                                     </td>
                                     <td>
-                                       <?php echo $data['alamat'];?>
+                                       <?php echo $data['tgl_dibuat'];?>
                                     </td>
                                     <td>
-                                       <?php echo $data['jabatan'];?>
-                                    </td>
-                                    <td>
+                                       <a style="color: blue;" href= <?php echo "#" ?>>Read</a>
                                        <a href= <?php echo "form-edit.php?nip=", $data['id']; ?>>Edit</a>
                                       
                                        <a style="color: red;" onclick="return confirm('Hapus Data?');"href=<?php echo "hapus.php?nip=", $data['id']; ?>>Delete</a>
@@ -206,50 +207,44 @@
                            </div>
                            <div class="card-body">
                               <p>Silahkan masukkan data yang diperlukan:</p>
-                              <form action="tambahP.php" method="post">
-                                 <div class="row">
-                                    <div class="col-lg-12" style="margin-bottom:0px;">
-                                       <div class="form-group">
-                                          <label>Nama Lengkap</label>
-                                          <input type="text" name="nama" placeholder="Nama Lengkap" class="form-control">
-                                       </div>
+                              <form action="aturan-keputusan-proses.php" method="post">
+                                <div class="row">
+                                    <div class='col-lg-12' style='margin-bottom:10px;'>
+                                        <label for='Nilai'>Nama Aturan</label>
+                                        <input type="text" name="nama" placeholder="Nama aturan" class="form-control">
                                     </div>
                                  </div>
                                  <div class="row">
-                                    <div class="col-lg-6" style="margin-bottom:0px;">
-                                       <div class="form-group">
-                                          <label>Username</label>
-                                          <input type="text" name="username" placeholder="Username" class="form-control">
-                                       </div>
-                                    </div>
-                                    <div class="col-lg-6" style="margin-bottom:0px;">
-                                       <div class="form-group">
-                                          <label>Password</label>
-                                          <input type="password" name="password" placeholder="Password" class="form-control">
-                                       </div>
-                                    </div>
+                                 <?php 
+                                    while($k = mysqli_fetch_array($aturan)){
+                                        $nama = strtolower($k['nama']);
+                                        echo "
+                                            <div class='col-lg-6' style='margin-bottom:0px;'>
+                                                <div class='form-group'>
+                                                    <label>",$k['nama'],"</label>
+                                                    <select name='",$nama,"' class='form-control'>
+                                                        <option value='rendah' >Tidak Diharapkan</option>
+                                                        <option value='sedang' >Dipertimbangkan</option>
+                                                        <option value='tinggi' >Diharapkan</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        ";
+                                    }
+                                    ?>
                                  </div>
                                  <div class="row">
-                                    <div class="col-lg-6" style="margin-bottom:0px;">
-                                       <div class="form-group">
-                                          <label>NIP </label>
-                                          <input type="text" name="nip" placeholder="Nomor Induk Pegawai" class="form-control">
-                                       </div>
+                                    <div class='col-lg-12'>
+                                        <label for='Nilai'>Nilai Kelayakan</label>
+                                        <select name='nilai' class='form-control'>
+                                            <option value='rendah' >Tidak Diharapkan</option>
+                                            <option value='sedang' >Dipertimbangkan</option>
+                                            <option value='tinggi' >Diharapkan</option>
+                                        </select>
                                     </div>
-                                    <div class="col-lg-6" style="margin-bottom:0px;">
-                                       <div class="form-group">
-                                          <label>Jabatan</label>
-                                          <input type="text" name="jabatan" placeholder="Jabatan " class="form-control">
-                                       </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="form-group">
-                                    <label>Alamat</label>
-                                    <textarea style="min-height: 100px; max-height: 200px;" name="alamat" placeholder="Alamat" class="form-control"></textarea>
                                  </div>
                                  <div class="form-group">
-                                    <input type="submit" name="submit" value="Daftar" class="btn btn-primary">
+                                    <input type="submit" name="submit" value="Tambah" class="btn btn-primary">
                                  </div>
                               </form>
                            </div>
