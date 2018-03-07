@@ -19,4 +19,10 @@ for {
         kalau engga munculin
     }
 }
- 
+BARU LAGI
+1. edit aturan-keputusan
+2. delete aturan-keputusan
+3. read kredit
+4. delete kredit
+5. edit kredit
+6. read aturan keputusan
