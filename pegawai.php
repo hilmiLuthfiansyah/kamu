@@ -80,8 +80,8 @@
                            </a>
                         </li>
                         <li>
-                           <a href="pegawai.php">
-                              <i class="icon-form"></i>
+                           <a href="aturan-keputusan.php">
+                              <i class="icon-presentation"></i>
                               <span>Aturan Keputusan</span>
                            </a>
                         </li>

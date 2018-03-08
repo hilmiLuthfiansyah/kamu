@@ -80,6 +80,12 @@
                                         </a>
                                     </li>
                                     <li>
+                                       <a href="aturan-keputusan.php">
+                                          <i class="icon-presentation"></i>
+                                          <span>Aturan Keputusan</span>
+                                       </a>
+                                   </li>
+                                    <li>
                                         <a href="pegawai.php">
                                             <i class="icon-form"></i>
                                             <span>Data Pegawai</span>
@@ -94,7 +100,7 @@
                                     </li>
                                     <li>
                                         <a href="transaksi-kredit.php">
-                                            <i class="icon-form"></i>
+                                            <i class="icon-presentation"></i>
                                             <span>Transaksi Kredit</span>
                                         </a>
                                     </li>

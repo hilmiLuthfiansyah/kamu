@@ -85,7 +85,7 @@
                         </li>
                         <li class="active">
                            <a href="pegawai.php">
-                              <i class="icon-form"></i>
+                              <i class="icon-presentation"></i>
                               <span>Aturan Keputusan</span>
                            </a>
                         </li>
@@ -147,7 +147,7 @@
             <div class="breadcrumb-holder">
                <div class="container-fluid">
                   <ul class="breadcrumb">
-                     <li class="breadcrumb-item active"><h3>Data Pegawai Kredit<h3></li>
+                     <li class="breadcrumb-item active"><h3>Kriteria dan Aturan Kredit<h3></li>
                   </ul>
                </div>
             </div>
@@ -160,7 +160,7 @@
                               <tr>
                                  <th>No.</th>
                                  <th>Id</th>
-                                 <th>Nama</th>
+                                 <th>Nama Aturan</th>
                                  <th>Tanggal Dibuat</th>
                                  <th>Action</th>
                               </tr>
@@ -187,9 +187,9 @@
                                     </td>
                                     <td>
                                        <a style="color: blue;" href= <?php echo "#" ?>>Read</a>
-                                       <a href= <?php echo "form-edit.php?nip=", $data['id']; ?>>Edit</a>
+                                       <a href= <?php echo "edit-aturan-keputusan.php?id=", $data['id']; ?>>Edit</a>
                                       
-                                       <a style="color: red;" onclick="return confirm('Hapus Data?');"href=<?php echo "hapus.php?nip=", $data['id']; ?>>Delete</a>
+                                       <a style="color: red;" onclick="return confirm('Hapus Data?');"href=<?php echo "hapus-aturan-keputusan.php?id=", $data['id']; ?>>Delete</a>
                                     </td>
                                  </tr>
                                  <?php

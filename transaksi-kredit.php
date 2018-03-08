@@ -134,7 +134,7 @@
                             </li>
                             <li class="active"> 
                                 <a href="transaksi-kredit.php">
-                                    <i class="icon-form"></i>
+                                    <i class="icon-presentation"></i>
                                     <span>Transaksi Kredit</span>
                                 </a>
                             </li>
@@ -264,7 +264,7 @@
                                                         </div>
                                                     </div>
                                                     ";
-                                                } else if(nama== "umur"){
+                                                } else if($nama== "umur"){
                                                     $umur = true;
                                                     echo "
                                                     <div class='col-lg-6' style='margin-bottom:0px;'>

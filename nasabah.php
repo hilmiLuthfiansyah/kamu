@@ -118,7 +118,7 @@
                             </li>
                             <li>
                                 <a href="transaksi-kredit.php">
-                                    <i class="icon-form"></i>
+                                    <i class="icon-presentation"></i>
                                     <span>Transaksi Kredit</span>
                                 </a>
                             </li>

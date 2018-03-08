@@ -79,9 +79,15 @@
                         </li>
                         <li class=>
                             <a href="keputusan.php">
-                                <i class="icon-form"></i>
-                                <span>Keputusan</span>
+                                <i class="icon-interface-windows"></i>
+                                <span>Kriteria Keputusan</span>
                             </a>
+                        </li>
+                        <li >
+                           <a href="aturan-keputusan.php">
+                              <i class="icon-presentation"></i>
+                              <span>Aturan Keputusan</span>
+                           </a>
                         </li>
                         <li class="active">
                             <a href="forms.php">
