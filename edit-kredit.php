@@ -164,7 +164,7 @@
                                         <div class="col-lg-12" style="margin-bottom:0px;">
                                             <div class="form-group">
                                                 <label>ID Nasabah</label>
-                                                <input type="text" name="id_user" placeholder="ID Nasabah" class="form-control" value="<?php echo $d['id_user'];?>" >
+                                                <input type="text" name="id_user" placeholder="ID Nasabah" class="form-control"  >
                                             </div>
                                         </div>
                                     </div>
