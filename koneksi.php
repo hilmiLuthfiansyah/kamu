@@ -1,8 +1,8 @@
 <?php
     $config = [
     'hostname' => 'localhost:3307',
-    'username' => 'root',
-    'password' => 'hilmil',
+    'username' => 'meiko',
+    'password' => 'meiko',
     'database' => 'pudbpr'
     ];
  

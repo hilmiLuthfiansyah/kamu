@@ -181,12 +181,12 @@
                               <tr>
                                  <th>No.</th>
                                  <th>Nama Kriteria</th>
-                                 <th>BB tidak diharapkan</th>
-                                 <th>BA tidak diharpkan</th>
-                                 <th>BB dipertimbangkan</th>
-                                 <th>BA dipertimbangkan</th>
-                                 <th>BB diharapkan</th>
-                                 <th>BA diharapkan</th>
+                                 <th>BB rendah</th>
+                                 <th>BA rendah</th>
+                                 <th>BB sedang</th>
+                                 <th>BA sedang</th>
+                                 <th>BB tinggi</th>
+                                 <th>BA tinggi</th>
                                  <th>Action</th>
                               </tr>
                            </thead>
