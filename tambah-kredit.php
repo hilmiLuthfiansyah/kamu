@@ -10,7 +10,7 @@
     while($data = mysqli_fetch_array($aturan)){
         array_push($input,strtolower($data['nama']));
     }
-
+    // ngambil keputusan
     $keputusan = array();
     $fk = array();
     for ($i = 0; $i < count($input); $i++) {
@@ -70,6 +70,7 @@
             $input[$i] => $_POST[$input[$i]],
         ));
     }
+    // ngambil kelayakan
     $kelayakan = array();
     for ($i=0; $i < count($fk); $i++) {
         $nama = $fk[$i]['nama'] ;
@@ -164,8 +165,7 @@
             "$nama" => $val_kelayakan,
         ));
     }
-    //echo json_encode($kelayakan);
-    //echo "<br>";
+    // ngambil aturan keputusan
     $q_aturan_keputusan = "
         SELECT * FROM aturan_keputusan;
     ";
@@ -193,7 +193,7 @@
                 }
             }
         }
-        // need to update
+        
         if ($p == count($jd['aturan'])){
             array_push($res, array(
                 "nama"=> $val_k,
@@ -201,6 +201,7 @@
             ));
         }
     }
+    // ngambil yang besar
     $max_l = 0;
     $max_tl = 0;
     for ($i=0; $i < count($res); $i++) { 
@@ -214,12 +215,14 @@
             }
         }
     }
+    // LOM
     $kl = 'tidak layak';
     $val_kl = $max_tl;
     if ($max_l > $max_tl){
         $kl = 'layak';
         $val_kl = $max_l;
     }
+    // masuk ke database
     $x = json_encode($keputusan);
     $q_kredit= "INSERT INTO kredit(
                 id_user,
