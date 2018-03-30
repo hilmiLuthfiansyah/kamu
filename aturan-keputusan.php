@@ -186,7 +186,7 @@
                                        <?php echo $data['tgl_dibuat'];?>
                                     </td>
                                     <td>
-                                       <a style="color: blue;" href= <?php echo "#" ?>>Read</a>
+                                       <a style="color: blue;" data-toggle="modal" data-target="#myModal">Read</a>
                                        <a href= <?php echo "edit-aturan-keputusan.php?id=", $data['id']; ?>>Edit</a>
                                       
                                        <a style="color: red;" onclick="return confirm('Hapus Data?');"href=<?php echo "hapus-aturan-keputusan.php?id=", $data['id']; ?>>Delete</a>
@@ -223,9 +223,9 @@
                                                 <div class='form-group'>
                                                     <label>",$k['nama'],"</label>
                                                     <select name='",$nama,"' class='form-control'>
-                                                        <option value='rendah' >Tidak Diharapkan</option>
-                                                        <option value='sedang' >Dipertimbangkan</option>
-                                                        <option value='tinggi' >Diharapkan</option>
+                                                        <option value='rendah' >Rendah</option>
+                                                        <option value='sedang' >Sedang</option>
+                                                        <option value='tinggi' >Tinggi</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -237,9 +237,8 @@
                                     <div class='col-lg-12'>
                                         <label for='Nilai'>Nilai Kelayakan</label>
                                         <select name='nilai' class='form-control'>
-                                            <option value='rendah' >Tidak Diharapkan</option>
-                                            <option value='sedang' >Dipertimbangkan</option>
-                                            <option value='tinggi' >Diharapkan</option>
+                                            <option value='tlayak' >Tidak layak</option>
+                                            <option value='layak' >Layak</option>
                                         </select>
                                     </div>
                                  </div>
@@ -269,6 +268,23 @@
                </div>
             </footer>
          </div>
+         <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                <p>This is a large modal.</p>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
          <!-- Javascript files-->
          <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js">

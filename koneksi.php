@@ -1,6 +1,6 @@
 <?php
     $config = [
-    'hostname' => 'localhost:3307',
+    'hostname' => 'localhost:3306',
     'username' => 'meiko',
     'password' => 'meiko',
     'database' => 'pudbpr'

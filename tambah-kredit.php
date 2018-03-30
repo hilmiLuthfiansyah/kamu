@@ -70,11 +70,10 @@
             $input[$i] => $_POST[$input[$i]],
         ));
     }
-
     $kelayakan = array();
     for ($i=0; $i < count($fk); $i++) {
         $nama = $fk[$i]['nama'] ;
-        echo $nama;
+        $val_kelayakan = [];
         if (count($fk[$i]['fk']) == 2){
             for ($j=0; $j < count($fk[$i]['fk']); $j++) {
                 $bb = $fk[$i]['fk'][$j];
@@ -117,12 +116,18 @@
                     if ($hh > 0.5 && $hh != 0){
                         $hb =  $fk[$i]['fk'][1];
                         $hh = $hh;
-                        echo $hb,"(",$hh,")";
+                        array_push($val_kelayakan, array(
+                            "nama" => $hb,
+                            "value" => $hh,
+                        ));
                         $hh = 1 - $hh;
                     }else{
                         $hb =  $fk[$i]['fk'][0];
                         $hh = $hh;
-                        echo $hb,"(",$hh,")";
+                        array_push($val_kelayakan, array(
+                            "nama" => $hb,
+                            "value" => $hh,
+                        ));
                         $hh = 1 - $hh;
                     }    
                 }
@@ -131,12 +136,18 @@
                     if ($hh > 0.5){
                         $hb =  $fk[$i]['fk'][0];
                         $hh = $hh;
-                        echo $hb,"(",$hh,")";
+                        array_push($val_kelayakan, array(
+                            "nama" => $hb,
+                            "value" => $hh,
+                        ));
                         $hh = 1 - $hh;
                     }else{
                         $hb =  $fk[$i]['fk'][1];
                         $hh = $hh;
-                        echo $hb,"(",$hh,")";
+                        array_push($val_kelayakan, array(
+                            "nama" => $hb,
+                            "value" => $hh,
+                        ));
                         $hh = 1 - $hh;
                     }
                 }
@@ -144,12 +155,71 @@
         }else{
             $hb = $fk[$i]['fk'][0];
             $hh = 1;
-            echo $hb,"(",$hh,")";
+            array_push($val_kelayakan, array(
+                "nama" => $hb,
+                "value" => $hh,
+            ));
+        }
+        array_push($kelayakan, array(
+            "$nama" => $val_kelayakan,
+        ));
+    }
+    //echo json_encode($kelayakan);
+    //echo "<br>";
+    $q_aturan_keputusan = "
+        SELECT * FROM aturan_keputusan;
+    ";
+    // dak short for data aturan keputusan
+    $min = [];
+    $dak = mysqli_query($conn,$q_aturan_keputusan);
+    $res = [];
+    while($d = mysqli_fetch_array($dak)){
+        $p = 0;
+        $min = 2;
+        $val_k = "";
+        // $jd short for json data
+        $jd = json_decode($d['aturan'], true);
+        $val_k = $jd['value'];;
+        for ($i=0; $i < count($jd['aturan']); $i++) { 
+            $val = $jd['aturan'][$i]['value'];
+            $key = $jd['aturan'][$i]['nama'];
+            for ($j=0; $j < count($kelayakan[$i][$key]); $j++) { 
+                if ($kelayakan[$i][$key][$j]['nama'] == $val){
+                    $p++;
+                    if ($min > $kelayakan[$i][$key][$j]['value']){
+                        $min = $kelayakan[$i][$key][$j]['value'];
+                    }
+                    break;
+                }
+            }
+        }
+        // need to update
+        if ($p == count($jd['aturan'])){
+            array_push($res, array(
+                "nama"=> $val_k,
+                "value" => $min,
+            ));
         }
     }
-    //echo json_encode($fk);
-    return;
-
+    $max_l = 0;
+    $max_tl = 0;
+    for ($i=0; $i < count($res); $i++) { 
+        if ($res[$i]['nama'] == 'layak'){
+            if($max_l < $res[$i]['value']){
+                $max_l = $res[$i]['value'];
+            }
+        }else{
+            if($max_tl < $res[$i]['value']){
+                $max_tl = $res[$i]['value'];
+            }
+        }
+    }
+    $kl = 'tidak layak';
+    $val_kl = $max_tl;
+    if ($max_l > $max_tl){
+        $kl = 'layak';
+        $val_kl = $max_l;
+    }
     $x = json_encode($keputusan);
     $q_kredit= "INSERT INTO kredit(
                 id_user,
@@ -161,8 +231,8 @@
             VALUES(
                 '$id_user',
                 '$x',
-                'layak',
-                '1',
+                 '$kl',
+                '$val_kl',
                 NOW()
                 );";
     if (!mysqli_query($conn, $q_kredit)){

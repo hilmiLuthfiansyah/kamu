@@ -25,7 +25,7 @@
         ));
     }
     $data = array(
-        "aturan" => array($keputusan),
+        "aturan" => $keputusan,
         "value" => $_POST['nilai']
     );
     $vq_aturan = json_encode($data);
