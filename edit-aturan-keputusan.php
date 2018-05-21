@@ -176,7 +176,7 @@
                            </div>
                            
                                     <div class="form-group">
-                                    <input style="cursor:pointer;" type="submit" name="submit" value="Update" class="btn btn-primary">
+                                    <input style="cursor:pointer;" type="submit" name="submit" value="Ubah Data" class="btn btn-primary">
                                     </div>
                                 </div>
                             </form>

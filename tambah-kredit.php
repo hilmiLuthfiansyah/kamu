@@ -200,7 +200,12 @@
                 "value" => $min,
             ));
         }
+
     }
+
+    
+
+
     // ngambil yang besar
     $max_l = 0;
     $max_tl = 0;
@@ -222,6 +227,8 @@
         $kl = 'layak';
         $val_kl = $max_l;
     }
+    
+
     // masuk ke database
     $x = json_encode($keputusan);
     $q_kredit= "INSERT INTO kredit(
@@ -244,6 +251,3 @@
         echo "<script> alert('Berhasil menambahkan pemohon kredit'); location = 'transaksi-kredit.php'; </script>";
     }
 ?>
-       
-      	
-

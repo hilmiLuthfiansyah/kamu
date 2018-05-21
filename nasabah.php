@@ -262,7 +262,7 @@
                                             <div class="col-lg-6" style="margin-bottom:0px;">
                                                 <div class="form-group">
                                                     <label>Penghasilan</label>
-                                                    <input type="text" name="penghasilan" placeholder="Penghasilan/Bulan" class="form-control">
+                                                    <input type="number" min='0' name="penghasilan" placeholder="Penghasilan/Bulan" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -270,13 +270,13 @@
                                             <div class="col-lg-6" style="margin-bottom:0px;">
                                                 <div class="form-group">
                                                     <label>Tanggungan</label>
-                                                    <input type="text" name="tanggungan" placeholder="Tanggungan" class="form-control">
+                                                    <input type="number" min='0' name="tanggungan" placeholder="Tanggungan" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6" style="margin-bottom:0px;">
                                                 <div class="form-group">
                                                     <label>Umur</label>
-                                                    <input type="text" name="umur" placeholder="Umur" class="form-control">
+                                                    <input type="number" min='0' name="umur" placeholder="Umur" class="form-control">
                                                 </div>
                                             </div>
                                         </div>

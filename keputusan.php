@@ -141,41 +141,7 @@
                <div class="container-fluid">
                   <div class="row">
                      <div class="col-lg-12">
-                     <table class="table table-striped">
-                           <thead>
-                              <tr>
-                                 <th>No.</th>
-                                 <th>Dipertimbangkan</th>
-                                 <th>Diharapkan</th>
-                                 <th>Action</th>
-                              </tr>
-                           </thead>
-                           <tbody>
-                              <?php	
-                    $i=0;
-                    while($data=mysqli_fetch_array($keputusan))
-                    {         
-                    $i++;
-                ?>
-                                 <tr>
-                                    <td>
-                                       <?php echo $i;?>
-                                    </td>
-                                    <td>
-                                       <?php echo $data['dipertimbangkan'];?>
-                                    </td>
-                                    <td>
-                                       <?php echo $data['diharapkan'];?>
-                                    </td>
-                                    <td>
-                                    <a href= <?php echo "edit-keputusan-akhir.php?id=", $data['id']; ?>>Edit</a>
-                                    </td>
-                                 </tr>
-                                 <?php
-           }
-           ?>
-                           </tbody>
-                        </table>
+                     
                         <table class="table table-striped">
                            <thead>
                               <tr>
@@ -254,52 +220,52 @@
                                  </div>
                                  <div class="row">
                                     <div class="col-lg-12" style="margin-bottom:0px;">
-                                       <label> Tidak Diharapkan</label>
+                                       <label> Rendah </label>
                                     </div>
                                     <div class="col-lg-6" style="margin-bottom:0px;">
                                        <div class="form-group">
-                                          <input type="text" name="rendah-bb" placeholder="Batas bawah" class="form-control">
+                                       <input type="number" min='0' name="rendah-bb" placeholder="Batas bawah" class="form-control">
                                        </div>
                                     </div>
                                     <div class="col-lg-6" style="margin-bottom:0px;">
                                        <div class="form-group">
-                                          <input type="text" name="rendah-ba" placeholder="Batas atas" class="form-control">
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="row">
-                                    <div class="col-lg-12" style="margin-bottom:0px;">
-                                       <label> Dipertimbangkan</label>
-                                    </div>
-                                    <div class="col-lg-6" style="margin-bottom:0px;">
-                                       <div class="form-group">
-                                          <input type="text" name="sedang-bb" placeholder="Batas bawah" class="form-control">
-                                       </div>
-                                    </div>
-                                    <div class="col-lg-6" style="margin-bottom:0px;">
-                                       <div class="form-group">
-                                          <input type="text" name="sedang-ba" placeholder="Batas atas" class="form-control">
+                                       <input type="number" min='0' name="rendah-ba" placeholder="Batas atas" class="form-control">
                                        </div>
                                     </div>
                                  </div>
                                  <div class="row">
                                     <div class="col-lg-12" style="margin-bottom:0px;">
-                                       <label> Diharapkan</label>
+                                       <label> Sedang</label>
                                     </div>
                                     <div class="col-lg-6" style="margin-bottom:0px;">
                                        <div class="form-group">
-                                       <input type="text" name="tinggi-bb" placeholder="Batas bawah" class="form-control">
+                                       <input type="number" min='0' name="sedang-bb" placeholder="Batas bawah" class="form-control">
                                        </div>
                                     </div>
                                     <div class="col-lg-6" style="margin-bottom:0px;">
                                        <div class="form-group">
-                                       <input type="text" name="tinggi-ba" placeholder="Batas atas" class="form-control">
+                                       <input type="number" min='0' name="sedang-ba" placeholder="Batas atas" class="form-control">
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-lg-12" style="margin-bottom:0px;">
+                                       <label> Tinggi</label>
+                                    </div>
+                                    <div class="col-lg-6" style="margin-bottom:0px;">
+                                       <div class="form-group">
+                                       <input type="number" min='0' name="tinggi-bb" placeholder="Batas bawah" class="form-control">
+                                       </div>
+                                    </div>
+                                    <div class="col-lg-6" style="margin-bottom:0px;">
+                                       <div class="form-group">
+                                       <input type="number" min='0' name="tinggi-ba" placeholder="Batas atas" class="form-control">
                                        </div>
                                     </div>
                                  </div>
                                  
                                  <div class="form-group">
-                                    <input type="submit" name="submit" value="Create" class="btn btn-primary">
+                                    <input type="submit" name="submit" value="Buat Kriteria" class="btn btn-primary">
                                  </div>
                               </form>
                            </div>

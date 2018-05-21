@@ -167,14 +167,22 @@
                            </thead>
                            <tbody>
                               <?php	
-                    $i=0;
-                    while($data=mysqli_fetch_array($hasil))
-                    {         
-                    $i++;
-                ?>
+                               $per_page=10;
+                               $page_query=mysqli_query($conn,"SELECT * FROM aturan_keputusan");
+                               $total=mysqli_num_rows($page_query);
+                               $pages=ceil($total/$per_page);
+
+                               $page=(isset($_GET['page'])) ? (int)$_GET['page']:1;
+                               $start=($page-1)*$per_page;
+                               $query=mysqli_query($conn,"SELECT * FROM aturan_keputusan LIMIT $start, $per_page");
+                               $no=$start+1;
+                    
+                              while($data=mysqli_fetch_assoc($query)){         
+                    
+                                 ?>
                                  <tr>
                                     <td>
-                                       <?php echo $i;?>
+                                       <?php echo $no++;?>
                                     </td>
                                     <td>
                                        <?php echo $data['id'];?>
@@ -193,16 +201,31 @@
                                     </td>
                                  </tr>
                                  <?php
-           }
-           ?>
+                                     }
+                                 ?>
                            </tbody>
                         </table>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-lg-12">
-                        <div class="card">
-                           <div class="card-header d-flex align-items-center">
+                        <table class="table table-striped">
+                        <?php
+                        if($pages >= 1 && $page <= $pages ){
+                            echo "<b>Total Halaman Tabel Adalah</b> &nbsp";
+                            for($x=1; $x <= $pages; $x++){
+                                echo "&nbsp", ($x == $page) ? '<b><a href="?page='.$x.'">'.$x.'</a></b>' : '<a href="?page='.$x.'">'.$x.'</a>';
+                                
+                            }
+                        }
+                        echo "<br/> ";
+                        echo "<b>Total Data Adalah </b>","<b>$total</b>";
+                        
+                        ?>
+                       </tbody>
+                     </table>
+                    </div>
+                </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                               <div class="card-header d-flex align-items-center">
                               <h2 class="h5 display display">Masukkan Pegawai Kredit</h2>
                            </div>
                            <div class="card-body">
@@ -243,7 +266,7 @@
                                     </div>
                                  </div>
                                  <div class="form-group">
-                                    <input type="submit" name="submit" value="Tambah" class="btn btn-primary">
+                                    <input type="submit" name="submit" value="Buat Aturan" class="btn btn-primary">
                                  </div>
                               </form>
                            </div>
@@ -274,10 +297,18 @@
             <div class="modal-content">
                 <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
+                <h4 class="modal-title">Aturan Keputusan</h4>
                 </div>
                 <div class="modal-body">
-                <p>This is a large modal.</p>
+                <p>
+                        <?php
+                        $query = mysqli_query($conn,$sql);
+                         
+                        while($data=mysqli_fetch_assoc($query)){
+                          echo $data['aturan'];
+                         }
+                         ?>
+                </p>
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -15,6 +15,7 @@
     $sedang_bb = $_POST['sedang-bb'];
     $sedang_ba = $_POST['sedang-ba'];
     $tinggi_bb = $_POST['tinggi-bb'];
+    $tinggi_ba = $_POST['tinggi-ba'];
     
 
     $query= "
@@ -26,7 +27,8 @@
             rendah_ba = '$rendah_ba',
             sedang_bb = '$sedang_bb',
             sedang_ba = '$sedang_ba',
-            tinggi_bb = '$tinggi_bb'
+            tinggi_bb = '$tinggi_bb',
+            tinggi_ba = '$tinggi_ba'
         WHERE
             id='$id';
         ";

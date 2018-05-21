@@ -173,7 +173,7 @@
                                         </div>
                                     </div>
                                         <div class="form-group">
-                                            <input type="submit" name="submit" value="Update" class="btn btn-primary">
+                                            <input type="submit" name="submit" value="Ubah Data" class="btn btn-primary">
                                         </div>
                                 </form>
                             </div>

@@ -9,6 +9,7 @@
 	$sql = "
         SELECT 
             kredit.id_kredit,
+            kredit.ranking, 
             kredit.keputusan, 
             kredit.tgl_kredit, 
             user.id_user, 
@@ -192,19 +193,55 @@
                                         <th>ID Transaksi</th>
                                         <th>Nama Nasabah</th>
                                         <th>Tanggal Kredit</th>
+                                        <th>Nilai Fuzzy</th>
                                         <th>Keputusan</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php	
-				$i=0;
-				while($data = mysqli_fetch_array($hasil)){         
-				    $i++;
-			    ?>
+                                <?php	
+                               $per_page=10;
+                               $page_query=mysqli_query($conn,"
+                               SELECT 
+                                   kredit.id_kredit,
+                                   kredit.ranking, 
+                                   kredit.keputusan, 
+                                   kredit.tgl_kredit, 
+                                   user.id_user, 
+                                   user.nama
+                               FROM 
+                                   kredit
+                               INNER JOIN 
+                                   user
+                               ON
+                                   user.id_user = kredit.id_user");
+                               $total=mysqli_num_rows($page_query);
+                               $pages=ceil($total/$per_page);
+
+                               $page=(isset($_GET['page'])) ? (int)$_GET['page']:1;
+                               $start=($page-1)*$per_page;
+                               $query=mysqli_query($conn,"
+                               SELECT 
+                                   kredit.id_kredit,
+                                   kredit.ranking, 
+                                   kredit.keputusan, 
+                                   kredit.tgl_kredit, 
+                                   user.id_user, 
+                                   user.nama
+                               FROM 
+                                   kredit
+                               INNER JOIN 
+                                   user
+                               ON
+                                   user.id_user = kredit.id_user LIMIT $start, $per_page");
+                               $no=$start+1;
+                    
+                              while($data=mysqli_fetch_assoc($query)){         
+                    
+                                 ?>
                                         <tr>
                                             <td>
-                                                <?php echo $i;?>
+                                                 <?php echo $no++;?>
                                             </td>
                                             <td>
                                                 <?php echo $data['id_kredit'];?>
@@ -216,7 +253,10 @@
                                                 <?php echo $data['tgl_kredit'];?>
                                             </td>
                                             <td>
-                                                <?php echo $data['keputusan'];?>
+                                                <?php echo $data['ranking'];?>
+                                            </td>
+                                            <td>
+                                                <?php echo  $data['keputusan'];?>
                                             </td>
                                             <td>
                                                 <a style="color: blue;" href=<?php echo "#"?>>Read</a>
@@ -230,6 +270,21 @@
 	?>
                                 </tbody>
                             </table>
+                            <table class="table table-striped">
+                        <?php
+                        if($pages >= 1 && $page <= $pages ){
+                            echo "<b>Total Halaman Tabel Adalah</b> &nbsp";
+                            for($x=1; $x <= $pages; $x++){
+                                echo "&nbsp", ($x == $page) ? '<b><a href="?page='.$x.'">'.$x.'</a></b>' : '<a href="?page='.$x.'">'.$x.'</a>';
+                                
+                            }
+                        }
+                        echo "<br/> ";
+                        echo "<b>Total Data Adalah </b>","<b>$total</b>";
+                        
+                        ?>
+                       </tbody>
+                     </table>
                         </div>
                     </div>
 
@@ -254,7 +309,7 @@
                                         <?php 
                                             while($d = mysqli_fetch_array($kriteria)){
                                                 $nama = strtolower($d['nama']);
-                                                if ($nama== "tanggungan"){
+                                                if ($nama== "Tanggungan"){
                                                     $tanggungan = true;
                                                     echo "
                                                     <div class='col-lg-6' style='margin-bottom:0px;'>
@@ -274,7 +329,7 @@
                                                         </div>
                                                     </div>
                                                     ";
-                                                } else if($nama == "penghasilan"){
+                                                } else if($nama == "Penghasilan"){
                                                     $penghasilan = true;
                                                     echo "
                                                     <div class='col-lg-6' style='margin-bottom:0px;'>
@@ -289,7 +344,7 @@
                                                     <div class='col-lg-6' style='margin-bottom:0px;'>
                                                         <div class='form-group'>
                                                             <label>",$d['nama'],"</label>
-                                                            <input type='text' id='",$nama,"' name='", $nama,"'placeholder='",$d['nama'],"' class='form-control' >
+                                                            <input type='number' min='",$d['rendah_bb'],"' max='",$d['tinggi_ba'],"' id='",$nama,"' name='", $nama,"'placeholder='",$d['nama'],"' class='form-control' >
                                                         </div>
                                                     </div>
                                                     ";
@@ -298,7 +353,7 @@
                                         ?>
                                         </div>
                                         <div class="form-group">
-                                            <input type="submit" name="submit" value="Tambahkan" class="btn btn-primary">
+                                            <input type="submit" name="submit" value="Proses Data" class="btn btn-primary">
                                         </div>
                                     </form>
                                 </div>
@@ -336,9 +391,9 @@
         <script src="js/front.js"></script>
         <script>
         function userDetail(str) {
-            penghasilan = '<?php echo $penghasilan ;?>';
+            Penghasilan = '<?php echo $penghasilan ;?>';
             umur = '<?php echo $umur ;?>';
-            tanggungan = '<?php echo $tanggungan ;?>';
+            Tanggungan = '<?php echo $tanggungan ;?>';
             if (str.length == 0) { 
                 return;
             } else {

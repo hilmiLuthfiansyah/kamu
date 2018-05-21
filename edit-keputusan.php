@@ -196,14 +196,21 @@
                                  <div class="row">
                                     <div class="col-lg-12" style="margin-bottom:0px;">
                                        <label> Tinggi</label>
-                                       <div class="form-group">
-                                          <input type="text" name="tinggi-bb" placeholder="Batas bawah" class="form-control" value="<?php echo $data['tinggi_bb'];?>">
+                                       </div>
+                                       <div class="col-lg-6" style="margin-bottom:0px;">
+                                          <div class="form-group">
+                                             <input type="text" name="tinggi-bb" placeholder="Batas bawah" class="form-control" value="<?php echo $data['tinggi_bb'];?>">
+                                          </div>
+                                       </div>
+                                       <div class="col-lg-6" style="margin-bottom:0px;">
+                                          <div class="form-group">
+                                             <input type="text" name="tinggi-ba" placeholder="Batas atas" class="form-control" value="<?php echo $data['tinggi_ba'];?>">
+                                          </div>
                                        </div>
                                     </div>
-                                 </div>
                                  
                                  <div class="form-group">
-                                    <input style="cursor:pointer;" type="submit" name="submit" value="Update" class="btn btn-primary">
+                                    <input style="cursor:pointer;" type="submit" name="submit" value="Ubah Data" class="btn btn-primary">
                                  </div>
                               </form>
                            </div>

@@ -180,7 +180,7 @@
                                 </center>
                                 <p>
                                     <center> Memberikan layanan perbankan yang prima dengan meningkatkan kualitas sumberdaya manusia yang handal dengan mengandalkan Standar Operasional Prosedur dan Informasi dan teknologi, laba usaha dan Pendapatan Asli Daerah
-                                        yang makin meningkat, meningkatkan manajemen yang profesional dan transparan serta berorientasi pada kebutuhan Pasar usaha Mikro, Kecil dan menengah. MOTTO “Mitra Kerja membangun Ekonomi Rakyat”
+                                        yang makin meningkat, meningkatkan manajemen yang profesional dan transparan serta berorientasi pada kebutuhan Pasar usaha Mikro, Kecil dan menengah. 
                                     </center>
                                 </p>
                                 <center><br><br>
