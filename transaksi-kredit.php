@@ -10,7 +10,7 @@
         SELECT 
             kredit.id_kredit,
             kredit.ranking, 
-            kredit.keputusan, 
+            
             kredit.tgl_kredit, 
             user.id_user, 
             user.nama
@@ -193,8 +193,8 @@
                                         <th>ID Transaksi</th>
                                         <th>Nama Nasabah</th>
                                         <th>Tanggal Kredit</th>
-                                        <th>Nilai Fuzzy</th>
-                                        <th>Keputusan</th>
+                                        <th>Nilai Kelayakan</th>
+                                       
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -205,7 +205,7 @@
                                SELECT 
                                    kredit.id_kredit,
                                    kredit.ranking, 
-                                   kredit.keputusan, 
+                                   
                                    kredit.tgl_kredit, 
                                    user.id_user, 
                                    user.nama
@@ -224,7 +224,7 @@
                                SELECT 
                                    kredit.id_kredit,
                                    kredit.ranking, 
-                                   kredit.keputusan, 
+                         
                                    kredit.tgl_kredit, 
                                    user.id_user, 
                                    user.nama
@@ -233,13 +233,14 @@
                                INNER JOIN 
                                    user
                                ON
-                                   user.id_user = kredit.id_user LIMIT $start, $per_page");
+                                   user.id_user = kredit.id_user ORDER BY CONCAT(id_kredit) desc LIMIT $start, $per_page");
                                $no=$start+1;
                     
                               while($data=mysqli_fetch_assoc($query)){         
                     
                                  ?>
                                         <tr>
+                                        <center>
                                             <td>
                                                  <?php echo $no++;?>
                                             </td>
@@ -255,15 +256,14 @@
                                             <td>
                                                 <?php echo $data['ranking'];?>
                                             </td>
-                                            <td>
-                                                <?php echo  $data['keputusan'];?>
-                                            </td>
+                                            
                                             <td>
                                                 <a style="color: blue;" href=<?php echo "#"?>>Read</a>
                                                 <a href=<?php echo "edit-kredit.php?id_kredit=", $data[ 'id_kredit']; ?>>Edit</a>
                                                 <a style="color: red;" onclick="return confirm('Hapus Data?');"href=<?php echo "hapus-kredit.php?id_kredit=", $data[ 'id_kredit']; ?>>Delete</a>
                                                
                                             </td>
+                                            </center>
                                         </tr>
                                         <?php
 	}
