@@ -258,7 +258,7 @@
                                             </td>
                                             
                                             <td>
-                                                <a style="color: blue;" href=<?php echo "#"?>>Read</a>
+                                                <a style="color: blue;" onClick="getById(<?php echo $data['id_kredit'] ?>)" href=<?php echo "#"?>>Read</a>
                                                 <a href=<?php echo "edit-kredit.php?id_kredit=", $data[ 'id_kredit']; ?>>Edit</a>
                                                 <a style="color: red;" onclick="return confirm('Hapus Data?');"href=<?php echo "hapus-kredit.php?id_kredit=", $data[ 'id_kredit']; ?>>Delete</a>
                                                
@@ -378,6 +378,49 @@
                 </div>
             </footer>
         </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Detail Transaksi</h5>
+                <button type="button" class="close" onClick="closeModal()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label for="recipient-name" class="col-form-label">Id Kredit:</label>
+                        <input id="detail-id" type="text" class="form-control" readonly>
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="recipient-name" class="col-form-label">Nama:</label>
+                        <input id="detail-name" type="text" class="form-control" readonly>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label for="recipient-name" class="col-form-label">Ranking:</label>
+                        <input id="detail-ranking" type="text" class="form-control" readonly>
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="recipient-name" class="col-form-label">Tanggal Kredit:</label>
+                        <input id="detail-tgl-kredit" type="text" class="form-control" readonly>
+                    </div>
+                </div>
+                <div id="kriteria">
+                                            
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onClick="closeModal()" >Close</button>
+                <a class="btn btn-primary" href=<?php echo "edit-kredit.php?id_kredit=", $data[ 'id_kredit']; ?>>Edit</a>
+            </div>
+            </div>
+        </div>
+        </div>
         <!-- Javascript files-->
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js">
@@ -433,6 +476,31 @@
                 xmlhttp.open("GET", "nasabah-detail.php?id_user=" + str, true);
                 xmlhttp.send();
             }
+        }
+        function getById(id){
+            $('#exampleModal').addClass('show');
+            $('#exampleModal').css('display','block');
+            var path = "json-request.php?id="+id;
+            $.ajax({url: path, success: function(result){
+                $("#detail-name").val(result.nama);
+                $("#detail-ranking").val(result.ranking);
+                $("#detail-tgl-kredit").val(result.tgl_kredit);
+                $("#detail-id").val(result.id_kredit);
+                var ht = "";
+                result.kriteria.forEach(element => {
+                    var param = Object.keys(element);
+                    ht = ht + `
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">`+ param[0]+`:</label>
+                            <input value="`+element[param[0]]+`" type="text" class="form-control" readonly>
+                        </div>`
+                });
+                $('#kriteria').replaceWith(ht);
+            }}); 
+        }
+        function closeModal(){
+            $('#exampleModal').removeClass('show');
+            $('#exampleModal').css('display','none');
         }
 </script>
     </body>
