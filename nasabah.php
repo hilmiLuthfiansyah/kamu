@@ -184,15 +184,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php	
-				$i=0;
-				while($data=mysqli_fetch_array($hasil))
-				{         
-				$i++;
-			?>
+                                    <?php
+                                    
+                                    $per_page=10;
+                                    $page_query=mysqli_query($conn,"SELECT * FROM user");
+                                    $total=mysqli_num_rows($page_query);
+                                    $pages=ceil($total/$per_page);
+     
+                                    $page=(isset($_GET['page'])) ? (int)$_GET['page']:1;
+                                    $start=($page-1)*$per_page;
+                                    $query=mysqli_query($conn,"SELECT * FROM user  LIMIT $start, $per_page");
+                                    $no=$start+1;
+                         
+                                   while($data=mysqli_fetch_assoc($query)){         
+                         
+                                      ?>	
                                         <tr>
                                             <td>
-                                                <?php echo $i;?>
+                                                <?php echo $no++;?>
                                             </td>
                                             <td>
                                                 <?php echo $data['id_user'];?>
@@ -222,12 +231,27 @@
                                             </td>
                                         </tr>
                                         <?php
-	}
-	?>
+	                                      }
+	                                    ?>
                                 </tbody>
-                            </table>
+                                </table>
+                                <table class="table table-striped">
+                                <?php
+                                if($pages >= 1 && $page <= $pages ){
+                                    echo "<b>Total Halaman Tabel Adalah</b> &nbsp";
+                                    for($x=1; $x <= $pages; $x++){
+                                        echo "&nbsp", ($x == $page) ? '<b><a href="?page='.$x.'">'.$x.'</a></b>' : '<a href="?page='.$x.'">'.$x.'</a>';
+                                        
+                                    }
+                                }
+                                echo "<br/> ";
+                                echo "<b>Total Data Adalah </b>","<b>$total</b>";
+                                
+                                ?>
+                               </tbody>
+                             </table>
+                            </div>
                         </div>
-                    </div>
 
                     <div class="row">
                         <div class="col-lg-12">
