@@ -80,6 +80,12 @@
                                         </a>
                                     </li>
                                     <li>
+                                       <a href="aturan-keputusan.php">
+                                          <i class="icon-presentation"></i>
+                                          <span>Aturan Keputusan</span>
+                                       </a>
+                                   </li>
+                                    <li>
                                         <a href="pegawai.php">
                                             <i class="icon-form"></i>
                                             <span>Data Pegawai</span>
@@ -94,7 +100,7 @@
                                     </li>
                                     <li>
                                         <a href="transaksi-kredit.php">
-                                            <i class="icon-form"></i>
+                                            <i class="icon-presentation"></i>
                                             <span>Transaksi Kredit</span>
                                         </a>
                                     </li>
@@ -174,7 +180,7 @@
                                 </center>
                                 <p>
                                     <center> Memberikan layanan perbankan yang prima dengan meningkatkan kualitas sumberdaya manusia yang handal dengan mengandalkan Standar Operasional Prosedur dan Informasi dan teknologi, laba usaha dan Pendapatan Asli Daerah
-                                        yang makin meningkat, meningkatkan manajemen yang profesional dan transparan serta berorientasi pada kebutuhan Pasar usaha Mikro, Kecil dan menengah. MOTTO “Mitra Kerja membangun Ekonomi Rakyat”
+                                        yang makin meningkat, meningkatkan manajemen yang profesional dan transparan serta berorientasi pada kebutuhan Pasar usaha Mikro, Kecil dan menengah. 
                                     </center>
                                 </p>
                                 <center><br><br>

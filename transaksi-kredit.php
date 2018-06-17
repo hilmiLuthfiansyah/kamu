@@ -6,14 +6,31 @@
      </script>";
 	}
 	include 'koneksi.php';  
-	$sql="
-		SELECT * FROM 
-			kredit";  
-	$hasil=mysqli_query($conn,$sql);
+	$sql = "
+        SELECT 
+            kredit.id_kredit,
+            kredit.ranking, 
+            
+            kredit.tgl_kredit, 
+            user.id_user, 
+            user.nama
+        FROM 
+            kredit
+        INNER JOIN 
+            user
+        ON
+            user.id_user = kredit.id_user";
+    $hasil = mysqli_query($conn,$sql);
+    $k_query = "
+        SELECT * FROM 
+            aturan";
+    $kriteria = mysqli_query($conn,$k_query);
+    $tanggungan = false;
+    $penghasilan = false;
+    $umur = false;
 ?>
     <!DOCTYPE html>
     <html>
-
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -118,7 +135,7 @@
                             </li>
                             <li class="active"> 
                                 <a href="transaksi-kredit.php">
-                                    <i class="icon-form"></i>
+                                    <i class="icon-presentation"></i>
                                     <span>Transaksi Kredit</span>
                                 </a>
                             </li>
@@ -173,47 +190,101 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>ID Nasabah</th>
-                                        <th>Pengajuan Kredit</th>
-                                        <th>Waktu Pengembalian</th>
-                                        <th>Jaminan</th>
+                                        <th>ID Transaksi</th>
+                                        <th>Nama Nasabah</th>
+                                        <th>Tanggal Kredit</th>
+                                        <th>Nilai Kelayakan</th>
+                                       
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php	
-				$i=0;
-				while($data=mysqli_fetch_array($hasil))
-				{         
-				$i++;
-			?>
+                                <?php	
+                               $per_page=10;
+                               $page_query=mysqli_query($conn,"
+                               SELECT 
+                                   kredit.id_kredit,
+                                   kredit.ranking, 
+                                   
+                                   kredit.tgl_kredit, 
+                                   user.id_user, 
+                                   user.nama
+                               FROM 
+                                   kredit
+                               INNER JOIN 
+                                   user
+                               ON
+                                   user.id_user = kredit.id_user");
+                               $total=mysqli_num_rows($page_query);
+                               $pages=ceil($total/$per_page);
+
+                               $page=(isset($_GET['page'])) ? (int)$_GET['page']:1;
+                               $start=($page-1)*$per_page;
+                               $query=mysqli_query($conn,"
+                               SELECT 
+                                   kredit.id_kredit,
+                                   kredit.ranking, 
+                         
+                                   kredit.tgl_kredit, 
+                                   user.id_user, 
+                                   user.nama
+                               FROM 
+                                   kredit
+                               INNER JOIN 
+                                   user
+                               ON
+                                   user.id_user = kredit.id_user ORDER BY CONCAT(id_kredit) desc LIMIT $start, $per_page");
+                               $no=$start+1;
+                    
+                              while($data=mysqli_fetch_assoc($query)){         
+                    
+                                 ?>
                                         <tr>
+                                        <center>
                                             <td>
-                                                <?php echo $i;?>
+                                                 <?php echo $no++;?>
                                             </td>
                                             <td>
-                                                <?php echo $data['id_user'];?>
+                                                <?php echo $data['id_kredit'];?>
                                             </td>
                                             <td>
-                                                <?php echo $data['pengajuan'];?>
+                                                <?php echo $data['nama'];?>
                                             </td>
                                             <td>
-                                                <?php echo $data['waktu_pengembalian'];?>
+                                                <?php echo $data['tgl_kredit'];?>
                                             </td>
                                             <td>
-                                                <?php echo $data['jaminan'];?>
+                                                <?php echo $data['ranking'];?>
                                             </td>
+                                            
                                             <td>
+                                                <a style="color: blue;" onClick="getById(<?php echo $data['id_kredit'] ?>)" href=<?php echo "#"?>>Read</a>
                                                 <a href=<?php echo "edit-kredit.php?id_kredit=", $data[ 'id_kredit']; ?>>Edit</a>
                                                 <a style="color: red;" onclick="return confirm('Hapus Data?');"href=<?php echo "hapus-kredit.php?id_kredit=", $data[ 'id_kredit']; ?>>Delete</a>
                                                
                                             </td>
+                                            </center>
                                         </tr>
                                         <?php
 	}
 	?>
                                 </tbody>
                             </table>
+                            <table class="table table-striped">
+                        <?php
+                        if($pages >= 1 && $page <= $pages ){
+                            echo "<b>Total Halaman Tabel Adalah</b> &nbsp";
+                            for($x=1; $x <= $pages; $x++){
+                                echo "&nbsp", ($x == $page) ? '<b><a href="?page='.$x.'">'.$x.'</a></b>' : '<a href="?page='.$x.'">'.$x.'</a>';
+                                
+                            }
+                        }
+                        echo "<br/> ";
+                        echo "<b>Total Data Adalah </b>","<b>$total</b>";
+                        
+                        ?>
+                       </tbody>
+                     </table>
                         </div>
                     </div>
 
@@ -227,35 +298,62 @@
                                     <p>Silahkan masukkan data yang diperlukan:</p>
                                     <form action="tambah-kredit.php" method="post">
                                         <div class="row">
-                                            <div class="col-lg-6" style="margin-bottom:0px;">
+                                            <div class="col-lg-12" style="margin-bottom:0px;">
                                                 <div class="form-group">
                                                     <label>ID Nasabah</label>
-                                                    <input type="text" name="id_user" placeholder="ID Nasabah" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6" style="margin-bottom:0px;">
-                                                <div class="form-group">
-                                                    <label>Pengajuan Kredit</label>
-                                                    <input type="text" name="pengajuan" placeholder="Pengajuan Kredit/Bulan" class="form-control">
+                                                    <input onchange="userDetail(this.value)"type="text" name="id_user" placeholder="ID Nasabah" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-lg-6" style="margin-bottom:0px;">
-                                                <div class="form-group">
-                                                    <label>Waktu Pengembalian</label>
-                                                    <input type="text" name="waktu_pengembalian" placeholder="Waktu Pengembalian/Bulan" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6" style="margin-bottom:0px;">
-                                                <div class="form-group">
-                                                    <label>Jaminan</label>
-                                                    <input type="text" name="jaminan" placeholder="Jaminan" class="form-control">
-                                                </div>
-                                            </div>
+                                        <?php 
+                                            while($d = mysqli_fetch_array($kriteria)){
+                                                $nama = strtolower($d['nama']);
+                                                if ($nama== "Tanggungan"){
+                                                    $tanggungan = true;
+                                                    echo "
+                                                    <div class='col-lg-6' style='margin-bottom:0px;'>
+                                                        <div class='form-group'>
+                                                            <label>",$nama,"</label>
+                                                            <input type='text' name='", $nama,"' id='",$nama,"' placeholder='",$nama,"' class='form-control' >
+                                                        </div>
+                                                    </div>
+                                                    ";
+                                                } else if($nama== "umur"){
+                                                    $umur = true;
+                                                    echo "
+                                                    <div class='col-lg-6' style='margin-bottom:0px;'>
+                                                        <div class='form-group'>
+                                                            <label>",$nama,"</label>
+                                                            <input type='text' name='", $nama,"' id='",$nama,"' placeholder='",$nama,"' class='form-control'  >
+                                                        </div>
+                                                    </div>
+                                                    ";
+                                                } else if($nama == "Penghasilan"){
+                                                    $penghasilan = true;
+                                                    echo "
+                                                    <div class='col-lg-6' style='margin-bottom:0px;'>
+                                                        <div class='form-group'>
+                                                            <label>",$nama,"</label>
+                                                            <input type='text' name='", $nama,"' id='",$nama,"' placeholder='",$nama,"' class='form-control'  >
+                                                        </div>
+                                                    </div>
+                                                    ";
+                                                }else{
+                                                    echo "
+                                                    <div class='col-lg-6' style='margin-bottom:0px;'>
+                                                        <div class='form-group'>
+                                                            <label>",$d['nama'],"</label>
+                                                            <input type='number' min='",$d['rendah_bb'],"' max='",$d['tinggi_ba'],"' id='",$nama,"' name='", $nama,"'placeholder='",$d['nama'],"' class='form-control' >
+                                                        </div>
+                                                    </div>
+                                                    ";
+                                                }
+                                            }
+                                        ?>
                                         </div>
                                         <div class="form-group">
-                                            <input type="submit" name="submit" value="Tambahkan" class="btn btn-primary">
+                                            <input type="submit" name="submit" value="Proses Data" class="btn btn-primary">
                                         </div>
                                     </form>
                                 </div>
@@ -280,6 +378,49 @@
                 </div>
             </footer>
         </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Detail Transaksi</h5>
+                <button type="button" class="close" onClick="closeModal()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label for="recipient-name" class="col-form-label">Id Kredit:</label>
+                        <input id="detail-id" type="text" class="form-control" readonly>
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="recipient-name" class="col-form-label">Nama:</label>
+                        <input id="detail-name" type="text" class="form-control" readonly>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label for="recipient-name" class="col-form-label">Ranking:</label>
+                        <input id="detail-ranking" type="text" class="form-control" readonly>
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="recipient-name" class="col-form-label">Tanggal Kredit:</label>
+                        <input id="detail-tgl-kredit" type="text" class="form-control" readonly>
+                    </div>
+                </div>
+                <div id="kriteria">
+                                            
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onClick="closeModal()" >Close</button>
+                <a class="btn btn-primary" href=<?php echo "edit-kredit.php?id_kredit=", $data[ 'id_kredit']; ?>>Edit</a>
+            </div>
+            </div>
+        </div>
+        </div>
         <!-- Javascript files-->
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js">
@@ -291,6 +432,77 @@
         <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
         <script src="vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
         <script src="js/front.js"></script>
+        <script>
+        function userDetail(str) {
+            Penghasilan = '<?php echo $penghasilan ;?>';
+            umur = '<?php echo $umur ;?>';
+            Tanggungan = '<?php echo $tanggungan ;?>';
+            if (str.length == 0) { 
+                return;
+            } else {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        const data = JSON.parse(this.responseText);
+                        if(data.status == 200){
+                            if (data.data.penghasilan != null && penghasilan){
+                                document.getElementById("penghasilan").value = data.data.penghasilan;
+                                document.getElementById("penghasilan").readOnly = true;
+                            }
+                            if (data.data.umur != null && umur){
+                                document.getElementById("umur").value = data.data.umur;
+                                document.getElementById("umur").readOnly = true;
+                            }
+                            if (data.data.tanggungan != null && tanggungan){
+                                document.getElementById("tanggungan").value = data.data.tanggungan;
+                                document.getElementById("tanggungan").readOnly = true;
+                            }
+                        }else{
+                            if (tanggungan){
+                                document.getElementById("tanggungan").readOnly = false;
+                                document.getElementById("tanggungan").value = '';
+                            }
+                            if (umur){
+                                document.getElementById("umur").readOnly = false;
+                                document.getElementById("umur").value = '';
+                            }
+                            if (penghasilan){
+                                document.getElementById("penghasilan").readOnly = false;
+                                document.getElementById("penghasilan").value = '';
+                            }
+                        }
+                    }
+                };
+                xmlhttp.open("GET", "nasabah-detail.php?id_user=" + str, true);
+                xmlhttp.send();
+            }
+        }
+        function getById(id){
+            $('#exampleModal').addClass('show');
+            $('#exampleModal').css('display','block');
+            var path = "json-request.php?id="+id;
+            $.ajax({url: path, success: function(result){
+                $("#detail-name").val(result.nama);
+                $("#detail-ranking").val(result.ranking);
+                $("#detail-tgl-kredit").val(result.tgl_kredit);
+                $("#detail-id").val(result.id_kredit);
+                var ht = "";
+                result.kriteria.forEach(element => {
+                    var param = Object.keys(element);
+                    ht = ht + `
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">`+ param[0]+`:</label>
+                            <input value="`+element[param[0]]+`" type="text" class="form-control" readonly>
+                        </div>`
+                });
+                $('#kriteria').replaceWith(ht);
+            }}); 
+        }
+        function closeModal(){
+            $('#exampleModal').removeClass('show');
+            $('#exampleModal').css('display','none');
+        }
+</script>
     </body>
 
     </html>

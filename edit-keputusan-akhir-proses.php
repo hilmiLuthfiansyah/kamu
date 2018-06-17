@@ -9,26 +9,18 @@
     }
 
     $id = $_POST['id'];
-    $nama = $_POST['nama'];
-    $rendah_bb = $_POST['rendah-bb'];
-    $rendah_ba = $_POST['rendah-ba'];
-    $sedang_bb = $_POST['sedang-bb'];
-    $sedang_ba = $_POST['sedang-ba'];
-    $tinggi_bb = $_POST['tinggi-bb'];
-    $tinggi_ba = $_POST['tinggi-ba'];
+    $dipertimbangkan = $_POST['dipertimbangkan'];
+    $diharapkan = $_POST['diharapkan'];
+    
     
 
     $query= "
         UPDATE 
-           aturan 
+           keputusan
         SET  
-            nama ='$nama', 
-            rendah_bb = '$rendah_bb',
-            rendah_ba = '$rendah_ba',
-            sedang_bb = '$sedang_bb',
-            sedang_ba = '$sedang_ba',
-            tinggi_bb = '$tinggi_bb',
-            tinggi_ba = '$tinggi_ba'
+            dipertimbangkan ='$dipertimbangkan', 
+            diharapkan ='$diharapkan'
+            
         WHERE
             id='$id';
         ";

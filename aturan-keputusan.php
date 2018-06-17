@@ -5,11 +5,15 @@
      window.location = 'login.php';
      </script>";
    }
-?>
-   <?php
+
     include 'koneksi.php';  
-    $sql="SELECT * from admin where role='pegawai'";  
+    $sql="SELECT * from aturan_keputusan;";  
     $hasil=mysqli_query($conn,$sql);
+
+
+    $q_aturan = "SELECT * FROM aturan;";
+    $aturan = mysqli_query($conn,$q_aturan);
+
 ?>
       <!DOCTYPE html>
       <html>
@@ -79,13 +83,13 @@
                               <span>Kriteria Keputusan</span>
                            </a>
                         </li>
-                        <li>
-                           <a href="aturan-keputusan.php">
+                        <li class="active">
+                           <a href="pegawai.php">
                               <i class="icon-presentation"></i>
                               <span>Aturan Keputusan</span>
                            </a>
                         </li>
-                        <li class="active">
+                        <li>
                            <a href="pegawai.php">
                               <i class="icon-form"></i>
                               <span>Data Pegawai</span>
@@ -143,7 +147,7 @@
             <div class="breadcrumb-holder">
                <div class="container-fluid">
                   <ul class="breadcrumb">
-                     <li class="breadcrumb-item active"><h3>Data Pegawai Kredit<h3></li>
+                     <li class="breadcrumb-item active"><h3>Kriteria dan Aturan Kredit<h3></li>
                   </ul>
                </div>
             </div>
@@ -155,23 +159,30 @@
                            <thead>
                               <tr>
                                  <th>No.</th>
-                                 <th>NIP</th>
-                                 <th>Nama</th>
-                                 <th>Alamat</th>
-                                 <th>Jabatan</th>
+                                 <th>Id</th>
+                                 <th>Nama Aturan</th>
+                                 <th>Tanggal Dibuat</th>
                                  <th>Action</th>
                               </tr>
                            </thead>
                            <tbody>
                               <?php	
-                    $i=0;
-                    while($data=mysqli_fetch_array($hasil))
-                    {         
-                    $i++;
-                ?>
+                               $per_page=10;
+                               $page_query=mysqli_query($conn,"SELECT * FROM aturan_keputusan");
+                               $total=mysqli_num_rows($page_query);
+                               $pages=ceil($total/$per_page);
+
+                               $page=(isset($_GET['page'])) ? (int)$_GET['page']:1;
+                               $start=($page-1)*$per_page;
+                               $query=mysqli_query($conn,"SELECT * FROM aturan_keputusan LIMIT $start, $per_page");
+                               $no=$start+1;
+                    
+                              while($data=mysqli_fetch_assoc($query)){         
+                    
+                                 ?>
                                  <tr>
                                     <td>
-                                       <?php echo $i;?>
+                                       <?php echo $no++;?>
                                     </td>
                                     <td>
                                        <?php echo $data['id'];?>
@@ -180,76 +191,82 @@
                                        <?php echo $data['nama'];?>
                                     </td>
                                     <td>
-                                       <?php echo $data['alamat'];?>
+                                       <?php echo $data['tgl_dibuat'];?>
                                     </td>
                                     <td>
-                                       <?php echo $data['jabatan'];?>
-                                    </td>
-                                    <td>
-                                       <a href= <?php echo "form-edit.php?nip=", $data['id']; ?>>Edit</a>
+                                       <a style="color: blue;" data-toggle="modal" data-target="#myModal">Read</a>
+                                       <a href= <?php echo "edit-aturan-keputusan.php?id=", $data['id']; ?>>Edit</a>
                                       
-                                       <a style="color: red;" onclick="return confirm('Hapus Data?');"href=<?php echo "hapus.php?nip=", $data['id']; ?>>Delete</a>
+                                       <a style="color: red;" onclick="return confirm('Hapus Data?');"href=<?php echo "hapus-aturan-keputusan.php?id=", $data['id']; ?>>Delete</a>
                                     </td>
                                  </tr>
                                  <?php
-           }
-           ?>
+                                     }
+                                 ?>
                            </tbody>
                         </table>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-lg-12">
-                        <div class="card">
-                           <div class="card-header d-flex align-items-center">
+                        <table class="table table-striped">
+                        <?php
+                        if($pages >= 1 && $page <= $pages ){
+                            echo "<b>Total Halaman Tabel Adalah</b> &nbsp";
+                            for($x=1; $x <= $pages; $x++){
+                                echo "&nbsp", ($x == $page) ? '<b><a href="?page='.$x.'">'.$x.'</a></b>' : '<a href="?page='.$x.'">'.$x.'</a>';
+                                
+                            }
+                        }
+                        echo "<br/> ";
+                        echo "<b>Total Data Adalah </b>","<b>$total</b>";
+                        
+                        ?>
+                       </tbody>
+                     </table>
+                    </div>
+                </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                               <div class="card-header d-flex align-items-center">
                               <h2 class="h5 display display">Masukkan Pegawai Kredit</h2>
                            </div>
                            <div class="card-body">
                               <p>Silahkan masukkan data yang diperlukan:</p>
-                              <form action="tambahP.php" method="post">
-                                 <div class="row">
-                                    <div class="col-lg-12" style="margin-bottom:0px;">
-                                       <div class="form-group">
-                                          <label>Nama Lengkap</label>
-                                          <input type="text" name="nama" placeholder="Nama Lengkap" class="form-control">
-                                       </div>
+                              <form action="aturan-keputusan-proses.php" method="post">
+                                <div class="row">
+                                    <div class='col-lg-12' style='margin-bottom:10px;'>
+                                        <label for='Nilai'>Nama Aturan</label>
+                                        <input type="text" name="nama" placeholder="Nama aturan" class="form-control">
                                     </div>
                                  </div>
                                  <div class="row">
-                                    <div class="col-lg-6" style="margin-bottom:0px;">
-                                       <div class="form-group">
-                                          <label>Username</label>
-                                          <input type="text" name="username" placeholder="Username" class="form-control">
-                                       </div>
-                                    </div>
-                                    <div class="col-lg-6" style="margin-bottom:0px;">
-                                       <div class="form-group">
-                                          <label>Password</label>
-                                          <input type="password" name="password" placeholder="Password" class="form-control">
-                                       </div>
-                                    </div>
+                                 <?php 
+                                    while($k = mysqli_fetch_array($aturan)){
+                                        $nama = strtolower($k['nama']);
+                                        echo "
+                                            <div class='col-lg-6' style='margin-bottom:0px;'>
+                                                <div class='form-group'>
+                                                    <label>",$k['nama'],"</label>
+                                                    <select name='",$nama,"' class='form-control'>
+                                                        <option value='rendah' >Rendah</option>
+                                                        <option value='sedang' >Sedang</option>
+                                                        <option value='tinggi' >Tinggi</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        ";
+                                    }
+                                    ?>
                                  </div>
                                  <div class="row">
-                                    <div class="col-lg-6" style="margin-bottom:0px;">
-                                       <div class="form-group">
-                                          <label>NIP </label>
-                                          <input type="text" name="nip" placeholder="Nomor Induk Pegawai" class="form-control">
-                                       </div>
+                                    <div class='col-lg-12'>
+                                        <label for='Nilai'>Nilai Kelayakan</label>
+                                        <select name='nilai' class='form-control'>
+                                            <option value='tlayak' >Tidak layak</option>
+                                            <option value='layak' >Layak</option>
+                                        </select>
                                     </div>
-                                    <div class="col-lg-6" style="margin-bottom:0px;">
-                                       <div class="form-group">
-                                          <label>Jabatan</label>
-                                          <input type="text" name="jabatan" placeholder="Jabatan " class="form-control">
-                                       </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="form-group">
-                                    <label>Alamat</label>
-                                    <textarea style="min-height: 100px; max-height: 200px;" name="alamat" placeholder="Alamat" class="form-control"></textarea>
                                  </div>
                                  <div class="form-group">
-                                    <input type="submit" name="submit" value="Daftar" class="btn btn-primary">
+                                    <input type="submit" name="submit" value="Buat Aturan" class="btn btn-primary">
                                  </div>
                               </form>
                            </div>
@@ -274,6 +291,31 @@
                </div>
             </footer>
          </div>
+         <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Aturan Keputusan</h4>
+                </div>
+                <div class="modal-body">
+                <p>
+                        <?php
+                        $query = mysqli_query($conn,$sql);
+                         
+                        while($data=mysqli_fetch_assoc($query)){
+                          echo $data['aturan'];
+                         }
+                         ?>
+                </p>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
          <!-- Javascript files-->
          <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js">

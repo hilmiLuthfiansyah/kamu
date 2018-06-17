@@ -13,7 +13,10 @@
    }
    include 'koneksi.php';  
    $sql="SELECT * FROM aturan";
+   $sql1="SELECT * FROM keputusan";
    $hasil=mysqli_query($conn,$sql);
+   $keputusan=mysqli_query($conn,$sql1);
+   
 ?>
         <!DOCTYPE html>
         <html>
@@ -83,6 +86,13 @@
                      <span>Kriteria Keputusan</span>
                   </a>
                </li>
+               <li>
+                    <a href="aturan-keputusan.php">
+                       <i class="icon-presentation"></i>
+                       <span>Aturan Keputusan</span>
+                    </a>
+                </li>
+                       
                <li >
                   <a href="pegawai.php">
                      <i class="icon-form"></i>
@@ -123,7 +133,7 @@
                 <div class="breadcrumb-holder">
                <div class="container-fluid">
                   <ul class="breadcrumb">
-                     <li class="breadcrumb-item active"><h3>Data Pegawai Kredit<h3></li>
+                     <li class="breadcrumb-item active"><h3>Keputusan dan Kriteria Kredit<h3></li>
                   </ul>
                </div>
             </div>
@@ -131,16 +141,18 @@
                <div class="container-fluid">
                   <div class="row">
                      <div class="col-lg-12">
+                     
                         <table class="table table-striped">
                            <thead>
                               <tr>
                                  <th>No.</th>
                                  <th>Nama Kriteria</th>
-                                 <th>BB Rendah</th>
-                                 <th>BA Rendah</th>
-                                 <th>BB Sedang</th>
-                                 <th>BA Sedang</th>
-                                 <th>BB Tinggi</th>
+                                 <th>BB rendah</th>
+                                 <th>BA rendah</th>
+                                 <th>BB sedang</th>
+                                 <th>BA sedang</th>
+                                 <th>BB tinggi</th>
+                                 <th>BA tinggi</th>
                                  <th>Action</th>
                               </tr>
                            </thead>
@@ -174,6 +186,9 @@
                                        <?php echo $data['tinggi_bb'];?>
                                     </td>
                                     <td>
+                                       <?php echo $data['tinggi_ba'];?>
+                                    </td>
+                                    <td>
                                     <a href= <?php echo "edit-keputusan.php?id=", $data['id']; ?>>Edit</a>
                                       
                                       <a style="color: red;" onclick="return confirm('Hapus Data?');"href=<?php echo "hapus-keputusan.php?id=", $data['id']; ?>>Delete</a>
@@ -190,7 +205,7 @@
                      <div class="col-lg-12">
                         <div class="card">
                            <div class="card-header d-flex align-items-center">
-                              <h2 class="h5 display display">Tambah Pegawai Kredit</h2>
+                              <h2 class="h5 display display">Masukkan Kriteria Kredit</h2>
                            </div>
                            <div class="card-body">
                               <p>Silahkan masukkan data yang diperlukan:</p>
@@ -205,16 +220,16 @@
                                  </div>
                                  <div class="row">
                                     <div class="col-lg-12" style="margin-bottom:0px;">
-                                       <label> Rendah</label>
+                                       <label> Rendah </label>
                                     </div>
                                     <div class="col-lg-6" style="margin-bottom:0px;">
                                        <div class="form-group">
-                                          <input type="text" name="rendah-bb" placeholder="Batas bawah" class="form-control">
+                                       <input type="number" min='0' name="rendah-bb" placeholder="Batas bawah" class="form-control">
                                        </div>
                                     </div>
                                     <div class="col-lg-6" style="margin-bottom:0px;">
                                        <div class="form-group">
-                                          <input type="text" name="rendah-ba" placeholder="Batas atas" class="form-control">
+                                       <input type="number" min='0' name="rendah-ba" placeholder="Batas atas" class="form-control">
                                        </div>
                                     </div>
                                  </div>
@@ -224,26 +239,33 @@
                                     </div>
                                     <div class="col-lg-6" style="margin-bottom:0px;">
                                        <div class="form-group">
-                                          <input type="text" name="sedang-bb" placeholder="Batas bawah" class="form-control">
+                                       <input type="number" min='0' name="sedang-bb" placeholder="Batas bawah" class="form-control">
                                        </div>
                                     </div>
                                     <div class="col-lg-6" style="margin-bottom:0px;">
                                        <div class="form-group">
-                                          <input type="text" name="sedang-ba" placeholder="Batas atas" class="form-control">
+                                       <input type="number" min='0' name="sedang-ba" placeholder="Batas atas" class="form-control">
                                        </div>
                                     </div>
                                  </div>
                                  <div class="row">
                                     <div class="col-lg-12" style="margin-bottom:0px;">
                                        <label> Tinggi</label>
+                                    </div>
+                                    <div class="col-lg-6" style="margin-bottom:0px;">
                                        <div class="form-group">
-                                          <input type="text" name="tinggi-bb" placeholder="Batas bawah" class="form-control">
+                                       <input type="number" min='0' name="tinggi-bb" placeholder="Batas bawah" class="form-control">
+                                       </div>
+                                    </div>
+                                    <div class="col-lg-6" style="margin-bottom:0px;">
+                                       <div class="form-group">
+                                       <input type="number" min='0' name="tinggi-ba" placeholder="Batas atas" class="form-control">
                                        </div>
                                     </div>
                                  </div>
                                  
                                  <div class="form-group">
-                                    <input type="submit" name="submit" value="Create" class="btn btn-primary">
+                                    <input type="submit" name="submit" value="Buat Kriteria" class="btn btn-primary">
                                  </div>
                               </form>
                            </div>

@@ -77,21 +77,17 @@
                                 <span>Beranda</span>
                             </a>
                         </li>
-                        <li>  <a href="#pages-nav-list" data-toggle="collapse" aria-expanded="false">
-                        <i class="icon-interface-windows"></i>
-                        <span>Kriteria Keputusan</span>
-                        <div class="arrow pull-right">
-                           <i class="fa fa-angle-down"></i>
-                        </div>
-                     </a>
-                            <ul id="pages-nav-list" class="collapse list-unstyled">
-                                <li> <a href="#">Penghasilan</a></li>
-                                <li> <a href="#">Pengajuan Kredit</a></li>
-                                <li> <a href="#">Jangka Waktu</a></li>
-                                <li> <a href="#">Agunan</a></li>
-                                <li> <a href="#">Umur</a></li>
-                                <li> <a href="#">Tanggungan</a></li>
-                            </ul>
+                        <li class=>
+                            <a href="keputusan.php">
+                                <i class="icon-interface-windows"></i>
+                                <span>Kriteria Keputusan</span>
+                            </a>
+                        </li>
+                        <li >
+                           <a href="aturan-keputusan.php">
+                              <i class="icon-presentation"></i>
+                              <span>Aturan Keputusan</span>
+                           </a>
                         </li>
                         <li class="active">
                             <a href="forms.php">
@@ -177,7 +173,7 @@
                                         </div>
                                     </div>
                                         <div class="form-group">
-                                            <input type="submit" name="submit" value="Update" class="btn btn-primary">
+                                            <input type="submit" name="submit" value="Ubah Data" class="btn btn-primary">
                                         </div>
                                 </form>
                             </div>

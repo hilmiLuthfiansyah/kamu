@@ -1,24 +1,32 @@
 <?php
-    include 'koneksi.php';
-    
-    session_start();
-    if(!$_SESSION['is_logged_in'] && !$_SESSION['role']=='pegawai'){
-        echo "<script>
+      session_start();
+      if(!$_SESSION['is_logged_in'] && !$_SESSION['role']=='pegawai'){
+          echo "<script>
         window.location = 'login.php';
         </script>";
-    }
-
-    $id_kredit = $_GET['id_kredit'];
-    $query = "
-        SELECT * FROM 
-            kredit
-        WHERE
-            id_kredit = '$id_kredit';
-    "; 
-    
-    $result = mysqli_query($conn, $query);
-    $data = mysqli_fetch_array($result);
-
+       }
+       include 'koneksi.php';  
+       $sql = "
+           SELECT 
+               kredit.id_kredit,
+               kredit.keputusan, 
+               kredit.tgl_kredit, 
+               user.id_user, 
+               user.nama
+           FROM 
+               kredit
+           INNER JOIN 
+               user
+           ON
+               user.id_user = kredit.id_user";
+       $hasil = mysqli_query($conn,$sql);
+       $k_query = "
+           SELECT * FROM 
+               aturan";
+       $kriteria = mysqli_query($conn,$k_query);
+       $tanggungan = false;
+       $penghasilan = false;
+       $umur = false;
 ?>
 
     <!DOCTYPE html>
@@ -150,41 +158,67 @@
                                 
                                 <div class="card-body">
                                     <p>Silahkan ubah data yang diperlukan:</p>
-                                    <form action="edit-kredit-proses.php" method="post">
-                                        <div class="row">
-                                            <div class="col-lg-6" style="margin-bottom:0px;">
-                                                <div class="form-group">
-                                                    <label>ID Nasabah</label>
-                                                    <input type="text" name="x" placeholder="ID Nasabah" class="form-control" disabled value="<?php echo $data['id_user'];?>">
-                                                    <input type="hidden" name="id_user" placeholder="ID Nasabah" class="form-control" value="<?php echo $data['id_user'];?>">
-                                                    <input type="hidden" name="id_kredit" placeholder="ID Nasabah" class="form-control" value="<?php echo $data['id_kredit'];?>">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6" style="margin-bottom:0px;">
-                                                <div class="form-group">
-                                                    <label>Pengajuan Kredit</label>
-                                                    <input type="text" name="pengajuan" placeholder="Pengajuan" class="form-control" value="<?php echo $data['pengajuan'];?>">
-                                                </div>
+                                    <form action="tambah-kredit.php" method="post">
+                                    
+                                    <div class="row">
+                                        <div class="col-lg-12" style="margin-bottom:0px;">
+                                            <div class="form-group">
+                                                <label>ID Nasabah</label>
+                                                <input type="text" name="id_user" placeholder="ID Nasabah" class="form-control" >
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-lg-6" style="margin-bottom:0px;">
-                                                <div class="form-group">
-                                                    <label>Waktu Pengambilan</label>
-                                                    <input type="text" name="waktu_pengembalian" placeholder="Waktu Pengambilan" class="form-control" value="<?php echo $data['waktu_pengembalian'];?>">
+                                    </div>
+                                    <div class="row">
+                                    <?php 
+                                        while($d = mysqli_fetch_array($kriteria)){
+                                            $nama = strtolower($d['nama']);
+                                            if ($nama== "Tanggungan"){
+                                                $tanggungan = true;
+                                                echo "
+                                                <div class='col-lg-6' style='margin-bottom:0px;'>
+                                                    <div class='form-group'>
+                                                        <label>",$nama,"</label>
+                                                        <input type='text' name='", $nama,"' id='",$nama,"' placeholder='",$nama,"' class='form-control'  >
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-6" style="margin-bottom:0px;">
-                                                <div class="form-group">
-                                                    <label>Jaminan</label>
-                                                    <input type="text" name="jaminan" placeholder="Jaminan" class="form-control" value="<?php echo $data['jaminan'];?>">
+                                                ";
+                                            } else if($nama== "Umur"){
+                                                $umur = true;
+                                                echo "
+                                                <div class='col-lg-6' style='margin-bottom:0px;'>
+                                                    <div class='form-group'>
+                                                        <label>",$nama,"</label>
+                                                        <input type='text' name='", $nama,"' id='",$nama,"' placeholder='",$nama,"' class='form-control'  >
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="submit" name="submit" value="Update" class="btn btn-primary">
-                                        </div>
-                                    </form>
+                                                ";
+                                            } else if($nama == "Penghasilan"){
+                                                $penghasilan = true;
+                                                echo "
+                                                <div class='col-lg-6' style='margin-bottom:0px;'>
+                                                    <div class='form-group'>
+                                                        <label>",$nama,"</label>
+                                                        <input type='text' name='", $nama,"' id='",$nama,"' placeholder='",$nama,"' class='form-control'  >
+                                                    </div>
+                                                </div>
+                                                ";
+                                            }else{
+                                                echo "
+                                                <div class='col-lg-6' style='margin-bottom:0px;'>
+                                                    <div class='form-group'>
+                                                        <label>",$d['nama'],"</label>
+                                                        <input type='text' id='",$nama,"' name='", $nama,"'placeholder='",$d['nama'],"' class='form-control' >
+                                                    </div>
+                                                </div>
+                                                ";
+                                            }
+                                        }
+                                    ?>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" name="submit" value="Tambahkan" class="btn btn-primary">
+                                    </div>
+                                </form>
                                 </div>
                             </div>
                         </div>

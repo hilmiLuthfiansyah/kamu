@@ -195,7 +195,7 @@
                                             <textarea style="min-height: 100px; max-height: 200px;" name="alamat" placeholder="Alamat" class="form-control"><?php echo $data['alamat'];?></textarea>
                                         </div>
                                         <div class="form-group">
-                                            <input type="submit" name="submit" value="Update" class="btn btn-primary">
+                                            <input type="submit" name="submit" value="Ubah Data" class="btn btn-primary">
                                         </div>
                                     </form>
                                 </div>
